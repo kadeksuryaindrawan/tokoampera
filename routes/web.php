@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [LandingController::class, 'index']);
+
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::resource('category', CategoryController::class);
+    Route::resource('product', ProductController::class);
 });
 
-Auth::routes();
+Auth::routes([
+    'reset' => false,
+    'verify' => false,
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

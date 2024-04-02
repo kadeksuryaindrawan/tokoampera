@@ -1,77 +1,92 @@
-@extends('layouts.app')
+<!DOCTYPE HTML>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+<head>
+    <meta charset="utf-8">
+    <title>Evara Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin/imgs/theme/favicon.svg') }}">
+    <!-- Template CSS -->
+    <link href="{{ asset('admin/css/main.css') }}" rel="stylesheet" type="text/css" />
+</head>
 
+<body>
+    <main>
+        <section class="content-main mt-80 mb-80">
+            <div class="card mx-auto card-login-2">
                 <div class="card-body">
+                    <div class="mb-4 text-center">
+                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.svg" width="50%" alt="logo"></a>
+                    </div>
+                    <h4 class="card-title mb-3">Register</h4>
+                    <p class="mb-4">Silahkan daftar menggunakan data diri anda.</p>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username</label>
+                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="name" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Masukkan Username Anda">
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
+                        </div> <!-- form-group// -->
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Masukkan Email Anda">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                        </div> <!-- form-group// -->
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Masukkan Password Anda">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
+                        </div> <!-- form-group// -->
+                        <div class="mb-4">
+                            <label class="form-label" for="password-confirm">Confirm Password</label>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Masukkan Ulang Password Anda">
+                        </div> <!-- form-group// -->
+                        <div class="mb-4">
+                            <button type="submit" class="btn btn-primary w-100"> Register </button>
+                        </div> <!-- form-group// -->
                     </form>
+
+                    <p class="text-center mb-2">Already have an account? <a href="{{ url('/login') }}">Login</a></p>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+        </section>
+        <footer class="main-footer text-center">
+            <p class="font-xs">
+                <script>
+                document.write(new Date().getFullYear())
+                </script> ©, Evara - HTML Ecommerce Template .
+            </p>
+            <p class="font-xs mb-30">All rights reserved</p>
+        </footer>
+    </main>
+    <script src="{{ asset('admin/js/vendors/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('admin/js/vendors/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('admin/js/vendors/jquery.fullscreen.min.js') }}"></script>
+    <!-- Main Script -->
+    <script src="{{ asset('admin/js/main.js') }}" type="text/javascript"></script>
+</body>
+
+</html>
