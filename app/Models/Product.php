@@ -19,4 +19,9 @@ class Product extends Model
         'stok',
         'rated',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

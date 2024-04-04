@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('nominal');
-            $table->string('status');
+            $table->double('nominal');
+            $table->enum('status', ['tersedia', 'tidak tersedia']);
             $table->text('deskripsi');
             $table->text('gambar_voucher');
             $table->timestamps();

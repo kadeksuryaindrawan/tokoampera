@@ -21,18 +21,15 @@
             <div class="card mb-4">
                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h4>Produk</h4>
-                                        <a href="{{ route('product.create') }}"><button class="btn btn-primary">Tambah Produk</button></a>
+                                        <h4>Blog</h4>
+                                        <a href="{{ route('blog.create') }}"><button class="btn btn-primary">Tambah Blog</button></a>
                                     </div>
                                     <div style="overflow-x: scroll;">
                                         <table id="zero-conf" class="table" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Produk</th>
-                                                    <th>Kategori</th>
-                                                    <th>Harga</th>
-                                                    <th>Stok</th>
+                                                    <th>Judul</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -41,36 +38,27 @@
                                                 @php
                                                     $no=1;
                                                 @endphp
-                                                @foreach ($products as $product)
+                                                @foreach ($blogs as $blog)
                                                     <tr>
-                                                        <td style="vertical-align: middle;">{{ $no++ }}</td>
+                                                        <td>{{ $no++ }}</td>
+                                                        <td>{{ ucwords($blog->judul) }}</td>
                                                         <td style="vertical-align: middle;">
-                                                            <div class="d-flex align-items-center">
-                                                                <a class="example-image-link" href="{{ asset('storage/products/'.$product->img) }}" data-lightbox="example-1">
-                                                                    <img style="width: 50px; height: 50px; object-fit:cover;" src="{{ asset('storage/products/'.$product->img) }}" alt="">
-                                                                </a>
-                                                                <span style="margin-left: 5px; font-weight: 600; letter-spacing:1px;">{{ strtoupper($product->nama_produk) }}</span>
-                                                            </div>
-                                                        </td>
-                                                        <td style="vertical-align: middle;">{{ ucwords($product->category->name) }}</td>
-                                                        <td style="vertical-align: middle;">Rp. {{ number_format($product->price,0,",",".") }}</td>
-                                                        <td style="vertical-align: middle;">{{ $product->stok }}</td>
-                                                        <td style="vertical-align: middle;">
-                                                            @if ($product->status == 'active')
-                                                                <span class="badge rounded-pill alert-success text-success">{{ ucwords($product->status) }}</span>
+                                                            @if ($blog->status == 'tampil')
+                                                                <span class="badge rounded-pill alert-success text-success">{{ ucwords($blog->status) }}</span>
                                                             @else
-                                                                <span class="badge rounded-pill alert-danger text-danger">{{ ucwords($product->status) }}</span>
+                                                                <span class="badge rounded-pill alert-danger text-danger">{{ ucwords($blog->status) }}</span>
                                                             @endif
                                                         </td>
-                                                        <td style="vertical-align: middle;">
-                                                            <div class="dropdown d-flex align-items-center">
+                                                        <td>
+                                                            <div class="dropdown">
                                                                 <button class="btn btn-sm btn-primary" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                                     <i class="icon material-icons md-menu"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                    <a href="{{ route('product.show',$product->id) }}" class="dropdown-item">Detail</a>
-                                                                    <a href="{{ route('product.edit',$product->id) }}" class="dropdown-item">Edit</a>
-                                                                    <form action="{{route('product.destroy',$product->id)}}" method="post" onsubmit="return confirm('Yakin hapus produk?')">
+                                                                    <a href="{{ route('blog.show',$blog->id) }}" class="dropdown-item">Detail</a>
+                                                                    <a href="{{ route('blog.edit',$blog->id) }}" class="dropdown-item">Edit</a>
+
+                                                                    <form action="{{route('blog.destroy',$blog->id)}}" method="post" onsubmit="return confirm('Yakin hapus blog?')">
                                                                         @csrf
                                                                         @method('delete')
                                                                         <button class="dropdown-item"> Hapus</button>
@@ -78,7 +66,6 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-
                                                     </tr>
                                                 @endforeach
 

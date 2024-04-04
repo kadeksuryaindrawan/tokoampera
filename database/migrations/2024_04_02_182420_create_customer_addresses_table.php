@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('customer_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id');
-            $table->integer('stok');
             $table->string('nama_alamat');
             $table->text('alamat');
             $table->string('lat');

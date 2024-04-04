@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Art Shop Cempaka Group - Dashboard</title>
+    <title>Art Shop Cempaka Group - {{ ucwords(request()->segment(1)) }}</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="{{ asset('admin/css/main.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/DataTables/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/lightbox.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -32,9 +33,15 @@
         </div>
         <nav>
             <ul class="menu-aside">
+
                 <li class="menu-item {{ (request()->segment(1) == 'home') ? 'active' : '' }}">
                     <a class="menu-link" href="{{ url('/home') }}"> <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ (request()->segment(1) == 'user') ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ route('user.index') }}"> <i class="icon material-icons md-person"></i>
+                        <span class="text">User</span>
                     </a>
                 </li>
                 <li class="menu-item {{ (request()->segment(1) == 'category') ? 'active' : '' }}">
@@ -47,16 +54,15 @@
                         <span class="text">Produk</span>
                     </a>
                 </li>
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Products</span>
+                <li class="menu-item {{ (request()->segment(1) == 'voucher') ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ route('voucher.index') }}"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text">Voucher</span>
                     </a>
-                    <div class="submenu">
-                        <a href="page-products-list.html">Product List</a>
-                        <a href="page-products-grid.html">Product grid</a>
-                        <a href="page-products-grid-2.html">Product grid 2</a>
-                        <a href="page-categories.html">Categories</a>
-                    </div>
+                </li>
+                <li class="menu-item {{ (request()->segment(1) == 'blog') ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ route('blog.index') }}"> <i class="icon material-icons md-library_books"></i>
+                        <span class="text">Blog</span>
+                    </a>
                 </li>
                 <li class="menu-item has-submenu">
                     <a class="menu-link" href="page-orders-1.html"> <i class="icon material-icons md-shopping_cart"></i>
@@ -67,30 +73,10 @@
                         <a href="page-orders-2.html">Order list 2</a>
                         <a href="page-orders-detail.html">Order detail</a>
                         <a href="page-orders-tracking.html">Order tracking</a>
-<a href="page-invoice.html">Invoice</a>
+                        <a href="page-invoice.html">Invoice</a>
                     </div>
                 </li>
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
-                        <span class="text">Sellers</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-sellers-cards.html">Sellers cards</a>
-                        <a href="page-sellers-list.html">Sellers list</a>
-                        <a href="page-seller-detail.html">Seller profile</a>
-                    </div>
-                </li>
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
-                        <span class="text">Add product</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-form-product-1.html">Add product 1</a>
-                        <a href="page-form-product-2.html">Add product 2</a>
-                        <a href="page-form-product-3.html">Add product 3</a>
-                        <a href="page-form-product-4.html">Add product 4</a>
-                    </div>
-                </li>
+
                 <li class="menu-item has-submenu">
                     <a class="menu-link" href="page-transactions-1.html"> <i class="icon material-icons md-monetization_on"></i>
                         <span class="text">Transactions</span>
@@ -101,48 +87,9 @@
                         <a href="page-transactions-details.html">Transaction Details</a>
                     </div>
                 </li>
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Account</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-account-login.html">User login</a>
-                        <a href="page-account-register.html">User registration</a>
-                        <a href="page-error-404.html">Error 404</a>
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
-                        <span class="text">Brands</span> </a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
-                        <span class="text">Statistics</span>
-                    </a>
-                </li>
+
             </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-settings-1.html">Setting sample 1</a>
-                        <a href="page-settings-2.html">Setting sample 2</a>
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
-                        <span class="text"> Starter page </span>
-                    </a>
-                </li>
-            </ul>
+
             <br>
             <br>
         </nav>
@@ -223,6 +170,7 @@
     <script src="{{ asset('admin/js/vendors/chart.js') }}"></script>
     <script src="{{ asset('admin/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('admin/js/datatables.js') }}"></script>
+    <script src="{{ asset('admin/js/lightbox.js') }}"></script>
     <!-- Main Script -->
     <script src="{{ asset('admin/js/main.js') }}" type="text/javascript"></script>
     <script src="{{ asset('admin/js/custom-chart.js') }}" type="text/javascript"></script>

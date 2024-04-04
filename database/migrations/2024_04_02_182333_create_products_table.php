@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('category_id');
             $table->string('nama_produk');
             $table->text('deskripsi');
-            $table->string('price');
-            $table->string('status');
+            $table->double('price');
+            $table->enum('status', ['active', 'deactive']);
             $table->text('img');
             $table->integer('stok');
             $table->string('rated');

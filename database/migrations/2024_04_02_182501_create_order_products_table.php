@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id');
             $table->foreignId('product_id');
-            $table->string('qty');
-            $table->string('total');
+            $table->integer('qty');
+            $table->double('total');
             $table->string('rating');
             $table->text('review');
             $table->text('media');

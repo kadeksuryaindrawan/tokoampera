@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->text('deskripsi');
-            $table->string('status');
+            $table->enum('status', ['tampil', 'tidak tampil']);
             $table->text('gambar');
             $table->timestamps();
         });
