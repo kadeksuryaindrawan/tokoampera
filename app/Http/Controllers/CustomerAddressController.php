@@ -77,7 +77,7 @@ class CustomerAddressController extends Controller
                 "lat" => $request->lat,
                 "long" => $request->long,
             ]);
-            return redirect()->route('customer_address.index')->with('success', 'Berhasil tambah alamat!');
+            return redirect()->route('customer-address.index')->with('success', 'Berhasil tambah alamat!');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -102,7 +102,9 @@ class CustomerAddressController extends Controller
      */
     public function edit(CustomerAddress $customerAddress)
     {
-        //
+        $count_cart = $this->count_cart();
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        return view('customer.address.edit', compact('count_cart', 'categories','customerAddress'));
     }
 
     /**
@@ -114,7 +116,27 @@ class CustomerAddressController extends Controller
      */
     public function update(Request $request, CustomerAddress $customerAddress)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama_alamat' => ['required', 'string', 'max:255'],
+            'alamat' => ['required', 'string'],
+            'lat' => ['required'],
+            'long' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('customer-address.edit', ['customerAddress' => $customerAddress->id])->withErrors($validator)->withInput();
+        }
+        try {
+            $customerAddress->update([
+                "nama_alamat" => $request->nama_alamat,
+                "alamat" => $request->alamat,
+                "lat" => $request->lat,
+                "long" => $request->long,
+            ]);
+            return redirect()->route('customer-address.index')->with('success', 'Berhasil edit alamat!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -125,6 +147,7 @@ class CustomerAddressController extends Controller
      */
     public function destroy(CustomerAddress $customerAddress)
     {
-        //
+        $customerAddress->delete();
+        return redirect()->back()->with('success', 'Alamat berhasil dihapus!');
     }
 }

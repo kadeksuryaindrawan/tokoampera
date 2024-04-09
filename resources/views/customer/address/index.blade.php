@@ -30,7 +30,7 @@
                         </div>
 
                     <div class="col-12">
-                        <a href="{{ url()->previous() }}"><button class="btn btn-sm btn-primary">Kembali</button></a>
+                        <a href="{{ url('/checkout') }}"><button class="btn btn-sm btn-primary">Kembali</button></a>
                             <div class="card mb-4 mt-40">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
