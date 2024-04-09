@@ -23,16 +23,17 @@ return new class extends Migration
             $table->text('alamat');
             $table->string('long');
             $table->string('lat');
-            $table->string('voucher');
-            $table->string('type_voucher');
-            $table->double('discount');
-            $table->string('shipping_courier');
-            $table->double('shipping_price');
-            $table->string('nama_bank');
-            $table->string('no_bank');
-            $table->string('pemilik_bank');
-            $table->text('bukti_bayar');
-            $table->datetime('tanggal_bayar');
+            $table->string('voucher')->nullable();
+            $table->double('discount')->nullable();
+            $table->string('shipping_courier')->nullable();
+            $table->double('shipping_price')->nullable();
+            $table->string('nama_bank')->nullable();
+            $table->string('no_bank')->nullable();
+            $table->string('pemilik_bank')->nullable();
+            $table->text('bukti_bayar')->nullable();
+            $table->datetime('tanggal_bayar')->nullable();
+            $table->text('catatan')->nullable();
+            $table->text('resi')->nullable();
             $table->timestamps();
         });
     }

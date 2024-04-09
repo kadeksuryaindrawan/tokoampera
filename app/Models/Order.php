@@ -19,7 +19,6 @@ class Order extends Model
         'long',
         'lat',
         'voucher',
-        'type_voucher',
         'discount',
         'shipping_courier',
         'shipping_price',
@@ -28,5 +27,7 @@ class Order extends Model
         'pemilik_bank',
         'bukti_bayar',
         'tanggal_bayar',
+        'catatan',
+        'resi'
     ];
 }

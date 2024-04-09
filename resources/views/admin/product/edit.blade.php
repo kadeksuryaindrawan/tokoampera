@@ -76,16 +76,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
-                                    <div class="col-lg-4">
-                                        <div class="mb-4">
-                                            <label for="rated" class="form-label">Rated</label>
-                                            <input type="text" placeholder="Masukkan Rated" name="rated" class="form-control" value="{{ $product->rated }}" id="rated" required>
-                                            @error('rated')
-                                                <div class="text-danger text-sm">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="mb-4">

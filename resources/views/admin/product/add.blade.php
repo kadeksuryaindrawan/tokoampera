@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-4">
                                             <label for="status" class="form-label">Status</label>
                                             <select name="status" id="status" class="form-control" required>
@@ -66,21 +66,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-4">
                                             <label for="stok" class="form-label">Stok</label>
                                             <input type="number" placeholder="Masukkan Stok" name="stok" class="form-control" id="stok" required>
                                             @error('stok')
-                                                <div class="text-danger text-sm">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4">
-                                        <div class="mb-4">
-                                            <label for="rated" class="form-label">Rated</label>
-                                            <input type="text" placeholder="Masukkan Rated" name="rated" class="form-control" id="rated" required>
-                                            @error('rated')
                                                 <div class="text-danger text-sm">{{ $message }}</div>
                                             @enderror
                                         </div>

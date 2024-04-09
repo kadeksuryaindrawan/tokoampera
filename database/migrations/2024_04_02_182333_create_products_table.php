@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'deactive']);
             $table->text('img');
             $table->integer('stok');
-            $table->string('rated');
+            $table->string('rated')->nullable();
             $table->timestamps();
         });
     }

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('nama_lengkap');
             $table->string('telp');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->text('img_profile');
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->text('img_profile')->nullable();
             $table->timestamps();
         });
     }

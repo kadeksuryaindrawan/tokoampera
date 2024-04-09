@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('qty');
             $table->double('total');
             $table->string('rating');
-            $table->text('review');
-            $table->text('media');
+            $table->text('review')->nullable();
+            $table->text('media')->nullable();
             $table->timestamps();
         });
     }

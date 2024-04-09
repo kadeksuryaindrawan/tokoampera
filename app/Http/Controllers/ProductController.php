@@ -46,7 +46,6 @@ class ProductController extends Controller
             'price' => ['required', 'numeric'],
             'status' => ['required'],
             'stok' => ['required', 'numeric'],
-            'rated' => ['required', 'string', 'max:255'],
             'img' => ['required', 'file', 'mimes:jpg,jpeg,png'],
         ]);
 
@@ -64,7 +63,6 @@ class ProductController extends Controller
                     "price" => $request->price,
                     "status" => $request->status,
                     "stok" => $request->stok,
-                    "rated" => $request->rated,
                     "img" => $file,
                 ]);
             } else {
@@ -75,7 +73,6 @@ class ProductController extends Controller
                     "price" => $request->price,
                     "status" => $request->status,
                     "stok" => $request->stok,
-                    "rated" => $request->rated,
                     "img" => '',
                 ]);
             }
@@ -126,7 +123,6 @@ class ProductController extends Controller
                 'price' => ['required', 'numeric'],
                 'status' => ['required'],
                 'stok' => ['required', 'numeric'],
-                'rated' => ['required', 'string', 'max:255'],
                 'img' => ['required', 'file', 'mimes:jpg,jpeg,png'],
             ]);
         } else {
@@ -137,7 +133,6 @@ class ProductController extends Controller
                 'price' => ['required', 'numeric'],
                 'status' => ['required'],
                 'stok' => ['required', 'numeric'],
-                'rated' => ['required', 'string', 'max:255'],
             ]);
         }
 
@@ -156,7 +151,6 @@ class ProductController extends Controller
                     "price" => $request->price,
                     "status" => $request->status,
                     "stok" => $request->stok,
-                    "rated" => $request->rated,
                     "img" => $file,
                 ]);
             } else {
@@ -167,7 +161,6 @@ class ProductController extends Controller
                     "price" => $request->price,
                     "status" => $request->status,
                     "stok" => $request->stok,
-                    "rated" => $request->rated,
                 ]);
             }
 

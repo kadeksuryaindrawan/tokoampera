@@ -18,14 +18,15 @@
     <link href="{{ asset('admin/css/main.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/DataTables/datatables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/lightbox.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/font-awesome/css/all.min.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <div class="screen-overlay"></div>
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
-            <a href="index.html" class="brand-wrap">
-                <img src="{{ asset('admin/imgs/theme/logo.svg') }}" class="logo" alt="Evara Dashboard">
+            <a href="{{ url('/') }}" class="brand-wrap">
+                <img src="{{ asset('admin/imgs/theme/logo.jpg') }}" style="width: 22%; margin-top:7px;" alt="Evara Dashboard">
             </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
@@ -115,15 +116,6 @@
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png" alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png" alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png" alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png" alt="Français">中国人</a>
-                        </div>
                     </li>
                     <li class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="{{ asset('admin/imgs/people/avatar2.jpg') }}" alt="User"></a>

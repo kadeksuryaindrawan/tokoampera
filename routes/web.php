@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerAddressController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
@@ -21,6 +24,12 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', [LandingController::class, 'index']);
+Route::get('/shop', [LandingController::class, 'shop']);
+Route::get('/category-shop/{id}', [LandingController::class, 'category_shop'])->name('category-shop');
+Route::get('/product-detail/{id}', [LandingController::class, 'product_detail'])->name('product-detail');
+Route::get('/blogs', [LandingController::class, 'blogs']);
+Route::get('/contact', [LandingController::class, 'contact']);
+Route::get('/blog-detail/{id}', [LandingController::class, 'blog_detail'])->name('blog-detail');
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('user', UserController::class);
@@ -28,6 +37,18 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('product', ProductController::class);
     Route::resource('voucher', VoucherController::class);
     Route::resource('blog', BlogController::class);
+});
+
+Route::group(['middleware' => ['auth', 'role:customer']], function () {
+    Route::post('/add-cart', [CartController::class, 'add'])->name('add-cart');
+    Route::delete('/clear-cart', [CartController::class, 'clear'])->name('clear-cart');
+    Route::delete('/delete-cart/{id}', [CartController::class, 'delete'])->name('delete-cart');
+    Route::put('/update-cart/{id}', [CartController::class, 'update'])->name('update-cart');
+    Route::get('/cart', [LandingController::class, 'cart']);
+    Route::get('/checkout', [OrderController::class, 'index']);
+    Route::post('/voucher', [OrderController::class, 'voucher'])->name('voucher');
+    Route::post('/voucher-destroy', [OrderController::class, 'voucher_destroy'])->name('voucher-destroy');
+    Route::resource('customer-address', CustomerAddressController::class);
 });
 
 Auth::routes([

@@ -21,9 +21,9 @@
     <main>
         <section class="content-main mt-80 mb-80">
             <div class="card mx-auto card-login">
-                <div class="card-body py-5">
+                <div class="card-body pb-50">
                     <div class="mb-4 text-center">
-                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.svg" width="50%" alt="logo"></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" width="20%" alt="logo"></a>
                     </div>
 
                     <h4 class="card-title mb-3">Login</h4>

@@ -21,17 +21,27 @@
     <main>
         <section class="content-main mt-80 mb-80">
             <div class="card mx-auto card-login-2">
-                <div class="card-body">
+                <div class="card-body pb-50">
                     <div class="mb-4 text-center">
-                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.svg" width="50%" alt="logo"></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" width="20%" alt="logo"></a>
                     </div>
                     <h4 class="card-title mb-3">Register</h4>
                     <p class="mb-4">Silahkan daftar menggunakan data diri anda.</p>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="mb-3">
+                            <label class="form-label" for="nama_lengkap">Nama Lengkap</label>
+                            <input id="nama_lengkap" type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required autocomplete="nama_lengkap" autofocus placeholder="Masukkan Nama Lengkap Anda">
+
+                                @error('nama_lengkap')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div> <!-- form-group// -->
+                        <div class="mb-3">
                             <label class="form-label" for="username">Username</label>
-                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="name" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Masukkan Username Anda">
+                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Masukkan Username Anda">
 
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -63,6 +73,17 @@
                         <div class="mb-4">
                             <label class="form-label" for="password-confirm">Confirm Password</label>
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Masukkan Ulang Password Anda">
+                        </div> <!-- form-group// -->
+
+                        <div class="mb-3">
+                            <label class="form-label" for="telp">No Telp</label>
+                            <input id="telp" type="text" class="form-control @error('telp') is-invalid @enderror" name="telp" value="{{ old('telp') }}" required autocomplete="telp" autofocus placeholder="Masukkan No Telp Anda">
+
+                                @error('telp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div> <!-- form-group// -->
                         <div class="mb-4">
                             <button type="submit" class="btn btn-primary w-100"> Register </button>
