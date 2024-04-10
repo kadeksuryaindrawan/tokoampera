@@ -26,7 +26,7 @@
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
             <a href="{{ url('/') }}" class="brand-wrap">
-                <img src="{{ asset('admin/imgs/theme/logo.jpg') }}" style="width: 22%; margin-top:7px;" alt="Evara Dashboard">
+                <img src="{{ asset('admin/imgs/theme/logo.jpg') }}" style="width: 20%; margin-bottom:-10px;" alt="Evara Dashboard">
             </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
@@ -65,17 +65,10 @@
                         <span class="text">Blog</span>
                     </a>
                 </li>
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-orders-1.html"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span>
+                <li class="menu-item {{ (request()->segment(1) == 'order') ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ url('/order') }}"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Order</span>
                     </a>
-                    <div class="submenu">
-                        <a href="page-orders-1.html">Order list 1</a>
-                        <a href="page-orders-2.html">Order list 2</a>
-                        <a href="page-orders-detail.html">Order detail</a>
-                        <a href="page-orders-tracking.html">Order tracking</a>
-                        <a href="page-invoice.html">Invoice</a>
-                    </div>
                 </li>
 
                 <li class="menu-item has-submenu">

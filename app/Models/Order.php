@@ -30,4 +30,9 @@ class Order extends Model
         'catatan',
         'resi'
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 }

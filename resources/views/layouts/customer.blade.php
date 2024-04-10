@@ -314,6 +314,7 @@
                                     <li><a class="{{ (request()->segment(1) == 'shop' || request()->segment(1) == 'product-detail' || request()->segment(1) == 'cart' || request()->segment(1) == 'category-shop' || request()->segment(1) == 'checkout' || request()->segment(1) == 'customer-address') ? 'active' : '' }}" href="{{ url('/shop') }}">Shop</a></li>
                                     <li><a class="{{ (request()->segment(1) == 'blogs' || request()->segment(1) == 'blog-detail') ? 'active' : '' }}" href="{{ url('/blogs') }}">Blog</a></li>
                                     <li><a class="{{ (request()->segment(1) == 'contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Contact</a></li>
+                                    <li><a class="{{ (request()->segment(1) == 'order-lists' || request()->segment(1) == 'order-history') ? 'active' : '' }}" href="{{ url('/order-lists') }}">Order</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -391,7 +392,11 @@
                             </li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/shop') }}">Shop</a>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog-category-fullwidth.html">Blog</a>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/blogs') }}">Blog</a>
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/contact') }}">Contact</a>
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/order-lists') }}">Order</a>
                             </li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
                                 <ul class="dropdown">
@@ -488,16 +493,16 @@
                         <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
                             <li><a href="{{ url('/') }}">Home</a></li>
                             <li><a href="{{ url('/shop') }}">Shop</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="{{ url('/blogs') }}">Blog</a></li>
+                            <li><a href="{{ url('/contact') }}">Contact Us</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-2 col-md-4">
                         <h5 class="widget-title wow fadeIn animated">My Account</h5>
                         <ul class="footer-list wow fadeIn animated">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">Order</a></li>
+                            <li><a href="{{ url('/login') }}">Sign In</a></li>
+                            <li><a href="{{ url('/cart') }}">View Cart</a></li>
+                            <li><a href="{{ url('/order-lists') }}">Order</a></li>
                         </ul>
                     </div>
 

@@ -17,4 +17,14 @@ class Customer extends Model
         'tanggal_lahir',
         'img_profile',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

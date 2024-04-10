@@ -77,48 +77,42 @@
                         <div class="mb-25">
                             <h4>Billing Details</h4>
                         </div>
-                        <form method="post">
+                        <form method="post" action="{{ route('checkout-process') }}">
+                            @csrf
                             <div class="form-group">
-                                <input type="text" required="" name="fname" placeholder="First name *">
+                                <label for="">Nama Lengkap</label>
+                                <input type="text" required="" name="nama_lengkap" value="{{ $customer->nama_lengkap }}" readonly>
                             </div>
                             <div class="form-group">
-                                <input type="text" required="" name="lname" placeholder="Last name *">
+                                <label for="">Email</label>
+                                <input type="email" required="" name="email" value="{{ $customer->user->email }}" readonly>
                             </div>
                             <div class="form-group">
-                                <input required="" type="text" name="cname" placeholder="Company Name">
+                                <label for="">No Telp</label>
+                                <input type="number" required="" name="telp" value="{{ $customer->telp }}" readonly>
                             </div>
                             <div class="form-group">
-                                <div class="custom_select">
-                                    <select class="form-control select-active">
-                                        <option value="">Select an option...</option>
-                                        <option value="AX">Aland Islands</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="billing_address" required="" placeholder="Address *">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="billing_address2" required="" placeholder="Address line2">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="city" placeholder="City / Town *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="state" placeholder="State / County *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="zipcode" placeholder="Postcode / ZIP *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="phone" placeholder="Phone *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="email" placeholder="Email address *">
+                                <label for="">Alamat</label>
+                                <select name="customer_address_id" id="" class="form-control" required>
+                                    <option value="" selected disabled>- Pilih Alamat -</option>
+                                    @foreach ($customer_addresses as $ca)
+                                        <option value="{{ $ca->id }}">{{ $ca->nama_alamat }} - {{ $ca->alamat }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
-                        </form>
+                            @if (session('nama_voucher'))
+                                @php
+                                    $total = $total_cart - session('nominal');
+                                @endphp
+                                <input type="hidden" name="voucher" value="{{ session('nama_voucher') }}">
+                                <input type="hidden" name="discount" value="{{ session('nominal') }}">
+                                <input type="hidden" name="total" value="{{ $total }}">
+                            @endif
+                            <input type="hidden" name="total_sebelum_discount" value="{{ $total_cart }}">
+                            <input type="hidden" name="customer_id" value="{{ $customer->id }}">
+
+
                     </div>
                     <div class="col-md-6">
                         <div class="order_review">
@@ -169,9 +163,7 @@
                                         <tr>
                                             <th>Total</th>
                                             @if (session('nominal'))
-                                            @php
-                                                $total = $total_cart - session('nominal');
-                                            @endphp
+
                                                 <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">Rp. {{ number_format($total,0,",",".") }}</span></td>
                                             @else
                                                 <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">Rp. {{ number_format($total_cart,0,",",".") }}</span></td>
@@ -181,7 +173,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="#" class="btn btn-fill-out btn-block mt-30">Checkout</a>
+                            <button onclick="return confirm('Yakin checkout? Pastikan data anda sudah benar!')" type="submit" class="btn btn-fill-out btn-block mt-30">Checkout</button>
+                            </form>
                         </div>
                     </div>
                 </div>

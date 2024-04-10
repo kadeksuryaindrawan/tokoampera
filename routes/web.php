@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('product', ProductController::class);
     Route::resource('voucher', VoucherController::class);
     Route::resource('blog', BlogController::class);
+    Route::get('/order', [OrderController::class, 'order'])->name('order');
 });
 
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
@@ -49,6 +50,9 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::post('/voucher', [OrderController::class, 'voucher'])->name('voucher');
     Route::post('/voucher-destroy', [OrderController::class, 'voucher_destroy'])->name('voucher-destroy');
     Route::resource('customer-address', CustomerAddressController::class);
+    Route::post('/checkout-process', [OrderController::class, 'checkout_process'])->name('checkout-process');
+    Route::get('/order-lists', [OrderController::class, 'list_order'])->name('order-lists');
+    Route::get('/order-history', [OrderController::class, 'history_order'])->name('order-history');
 });
 
 Auth::routes([

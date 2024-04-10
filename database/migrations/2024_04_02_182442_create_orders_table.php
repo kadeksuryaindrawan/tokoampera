@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id');
+            $table->foreignId('customer_id')->nullable();
             $table->string('invoice');
             $table->double('total_sebelum_discount');
             $table->double('total');
-            $table->enum('status', ['pending', 'menunggu pembayaran', 'konfirmasi pembayaran', 'terbayar', 'terkirim', 'diterima']);
+            $table->enum('status', ['pending', 'menunggu pembayaran', 'konfirmasi pembayaran', 'terbayar', 'terkirim', 'diterima', 'ditolak']);
             $table->text('alamat');
             $table->string('long');
             $table->string('lat');

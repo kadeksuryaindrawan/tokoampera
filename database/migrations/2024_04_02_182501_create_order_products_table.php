@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('product_id');
             $table->integer('qty');
             $table->double('total');
-            $table->string('rating');
+            $table->string('rating')->nullable();
             $table->text('review')->nullable();
             $table->text('media')->nullable();
             $table->timestamps();
