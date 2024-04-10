@@ -18,7 +18,7 @@ class CartController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('product-detail',$request->product_id)->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
         try {
             $customer = Customer::where('user_id', Auth::user()->id)->first();
@@ -28,18 +28,37 @@ class CartController extends Controller
 
             $total = $request->qty * $price;
 
-            if($request->qty > $product->stok){
-                return redirect()->route('product-detail', $request->product_id)->with('error', 'Jumlah tidak boleh melebihi dari stok yang tersedia!');
+            $cart = Cart::where('customer_id', $customer->id)->where('product_id', $request->product_id)->first();
+
+            if($cart == NULL){
+                if ($request->qty > $product->stok) {
+                    return redirect()->back()->with('error', 'Jumlah tidak boleh melebihi dari stok yang tersedia!');
+                } else {
+                    Cart::create([
+                        "customer_id" => $customer->id,
+                        "product_id" => $request->product_id,
+                        "qty" => $request->qty,
+                        "total" => $total,
+                    ]);
+
+                    return redirect()->back()->with('success', 'Berhasil menambah product ke cart!');
+                }
+            }else{
+                $old_qty = $cart->qty;
+                $new_qty = $old_qty + $request->qty;
+
+                if ($new_qty > $product->stok) {
+                    return redirect()->back()->with('error', 'Jumlah tidak boleh melebihi dari stok yang tersedia!');
+                } else {
+                    $cart->update([
+                        "qty" => $new_qty
+                    ]);
+
+                    return redirect()->back()->with('success', 'Berhasil menambah product ke cart!');
+                }
+
             }
-            else{
-                Cart::create([
-                    "customer_id" => $customer->id,
-                    "product_id" => $request->product_id,
-                    "qty" => $request->qty,
-                    "total" => $total,
-                ]);
-                return redirect()->route('product-detail', $request->product_id)->with('success', 'Berhasil menambah product ke cart!');
-            }
+
 
         } catch (\Throwable $th) {
             throw $th;

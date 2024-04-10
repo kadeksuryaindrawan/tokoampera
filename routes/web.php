@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::post('/add-cart', [CartController::class, 'add'])->name('add-cart');
+    Route::get('/add-cart-1', [CartController::class, 'add'])->name('add-cart-1');
     Route::delete('/clear-cart', [CartController::class, 'clear'])->name('clear-cart');
     Route::delete('/delete-cart/{id}', [CartController::class, 'delete'])->name('delete-cart');
     Route::put('/update-cart/{id}', [CartController::class, 'update'])->name('update-cart');

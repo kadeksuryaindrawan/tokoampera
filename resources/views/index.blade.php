@@ -112,6 +112,22 @@
                     </ul>
                     <a href="{{ url('/shop') }}" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                            @if(session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{session('success')}}
+                            </div>
+                            @endif
+
+                            @if(session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{session('error')}}
+                            </div>
+                            @endif
+                        </div>
+                </div>
                 <!--End nav-tabs-->
                 <div class="tab-content wow fadeIn animated" id="myTabContent">
                     <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
@@ -138,7 +154,7 @@
                                                 <span>Rp. {{ number_format($new->price,0,",",".") }}</span>
                                             </div>
                                             <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="{{ route('add-cart-1') }}?product_id={{ $new->id }}&qty=1"><i class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +190,7 @@
                                                 <span>Rp. {{ number_format($old->price,0,",",".") }}</span>
                                             </div>
                                             <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="{{ route('add-cart-1') }}?product_id={{ $old->id }}&qty=1"><i class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>
                                     </div>
