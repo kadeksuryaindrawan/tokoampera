@@ -314,7 +314,7 @@
                                     <li><a class="{{ (request()->segment(1) == 'shop' || request()->segment(1) == 'product-detail' || request()->segment(1) == 'cart' || request()->segment(1) == 'category-shop' || request()->segment(1) == 'checkout' || request()->segment(1) == 'customer-address') ? 'active' : '' }}" href="{{ url('/shop') }}">Shop</a></li>
                                     <li><a class="{{ (request()->segment(1) == 'blogs' || request()->segment(1) == 'blog-detail') ? 'active' : '' }}" href="{{ url('/blogs') }}">Blog</a></li>
                                     <li><a class="{{ (request()->segment(1) == 'contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Contact</a></li>
-                                    <li><a class="{{ (request()->segment(1) == 'order-lists' || request()->segment(1) == 'order-history') ? 'active' : '' }}" href="{{ url('/order-lists') }}">Order</a></li>
+                                    <li><a class="{{ (request()->segment(1) == 'order-lists' || request()->segment(1) == 'order-history' || request()->segment(1) == 'pay' || request()->segment(1) == 'order-acc') ? 'active' : '' }}" href="{{ url('/order-lists') }}">Order</a></li>
                                 </ul>
                             </nav>
                         </div>

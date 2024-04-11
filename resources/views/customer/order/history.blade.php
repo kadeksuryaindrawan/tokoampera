@@ -43,6 +43,7 @@
                                                     <th>No</th>
                                                     <th>Invoice</th>
                                                     <th>Total</th>
+                                                    <th>Kurir</th>
                                                     <th>Ongkir</th>
                                                     <th>Status</th>
                                                     <th>Tanggal Checkout</th>
@@ -60,7 +61,9 @@
                                                         <td>Rp. {{ number_format($order->total,0,",",".") }}</td>
                                                         @if ($order->shipping_price == NULL)
                                                             <td>-</td>
+                                                            <td>-</td>
                                                         @else
+                                                            <td>{{ $order->shipping_courier }}</td>
                                                             <td class="text-danger">Rp. {{ number_format($order->shipping_price,0,",",".") }}</td>
                                                         @endif
 

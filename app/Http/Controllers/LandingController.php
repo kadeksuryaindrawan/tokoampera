@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Customer;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,8 +57,10 @@ class LandingController extends Controller
         $count_cart = $this->count_cart();
         $product = Product::find($id);
         $products = Product::orderBy('created_at', 'desc')->where('status', 'active')->where('id', '!=', $id)->where('stok', '>', 0)->paginate(4);
+        $rater = OrderProduct::where('product_id',$product->id)->where('rating','!=',NULL)->count();
+        $order_products = OrderProduct::orderBy('created_at','desc')->where('product_id', $product->id)->where('rating', '!=', NULL)->get();
         $categories = Category::orderBy('created_at', 'desc')->get();
-        return view('product-detail', compact('product', 'categories','products', 'count_cart'));
+        return view('product-detail', compact('product', 'categories','products', 'count_cart','rater','order_products'));
     }
 
     public function blogs()

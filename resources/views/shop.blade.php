@@ -49,9 +49,18 @@
                                                 <a href="{{ route('category-shop',$new->category_id) }}">{{ ucwords($new->category->name) }}</a>
                                             </div>
                                             <h2><a href="{{ route('product-detail',$new->id) }}">{{ ucwords($new->nama_produk) }}</a></h2>
-                                            <div class="rating-result">
-
-                                            </div>
+                                            @php
+                                                $rating = !empty($new->rated) ? $new->rated : 0;
+                                            @endphp
+                                            @for($i = 1; $i <= 5; $i++)
+                                                @if($rating - $i >= 0)
+                                                    <i class="fas fa-star" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                @elseif($rating - $i < 0 && $rating - $i > -1)
+                                                    <i class="fas fa-star-half-alt" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                @else
+                                                    <i class="far fa-star" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                @endif
+                                            @endfor
                                             <div class="product-price">
                                                 <span>Rp. {{ number_format($new->price,0,",",".") }}</span>
                                             </div>

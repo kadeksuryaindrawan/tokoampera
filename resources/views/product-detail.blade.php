@@ -52,12 +52,22 @@
                                             <div class="pro-details-brand">
                                                 <span> Category : <a href="{{ route('category-shop',$product->category_id) }}">{{ ucwords($product->category->name) }}</a></span>
                                             </div>
-                                            <div class="product-rate-cover text-end">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width:90%">
-                                                    </div>
+                                            <div class="d-flex justify-content-end">
+                                                <div>
+                                                    @php
+                                                        $rating = !empty($product->rated) ? $product->rated : 0;
+                                                    @endphp
+                                                    @for($i = 1; $i <= 5; $i++)
+                                                        @if($rating - $i >= 0)
+                                                            <i class="fas fa-star" style="margin-right: -30px; color: #f6b93b;"></i>
+                                                        @elseif($rating - $i < 0 && $rating - $i > -1)
+                                                            <i class="fas fa-star-half-alt" style="margin-right: -30px; color: #f6b93b;"></i>
+                                                        @else
+                                                            <i class="far fa-star" style="margin-right: -30px; color: #f6b93b;"></i>
+                                                        @endif
+                                                    @endfor
                                                 </div>
-                                                <span class="font-small ml-5 text-muted"> (25 reviews)</span>
+                                                <span class="font-small ml-5 text-muted"> ({{ $rater }} reviews)</span>
                                             </div>
                                         </div>
                                         <div class="clearfix product-price-cover">
@@ -93,63 +103,73 @@
                                     <div class="description mb-50">
                                         <p>{{ ucfirst($product->deskripsi) }}</p>
                                     </div>
-                                    <h3 class="section-title style-1 mb-30 mt-30">Reviews (3)</h3>
+                                    <h3 class="section-title style-1 mb-30 mt-30">Reviews ({{ $rater }})</h3>
                                     <!--Comments-->
                                     <div class="comments-area style-2">
                                         <div class="row">
                                             <div class="col-lg-8">
                                                 <div class="comment-list">
-                                                    <div class="single-comment justify-content-between d-flex">
-                                                        <div class="user justify-content-between d-flex">
-                                                            <div class="thumb text-center">
-                                                                <img src="assets/imgs/page/avatar-6.jpg" alt="">
-                                                                <h6><a href="#">Jacky Chan</a></h6>
-                                                                <p class="font-xxs">Since 2012</p>
-                                                            </div>
-                                                            <div class="desc">
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width:90%">
+                                                    @foreach ($order_products as $op)
+                                                        <div class="single-comment justify-content-between d-flex">
+                                                            <div class="user justify-content-between d-flex">
+                                                                <div class="desc">
+                                                                    <img style="width: 50px;height:50px;object-fit:cover;" src="{{ asset('landing') }}/imgs/page/avatar-6.jpg" alt="">
+                                                                    <h6>{{ ucwords($op->order->customer->nama_lengkap) }}</h6>
+                                                                    <div class="">
+                                                                        @php
+                                                                            $rating = !empty($op->rating) ? $op->rating : 0;
+                                                                        @endphp
+                                                                        @for($i = 1; $i <= 5; $i++)
+                                                                            @if($rating - $i >= 0)
+                                                                                <i class="fas fa-star" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                                            @elseif($rating - $i < 0 && $rating - $i > -1)
+                                                                                <i class="fas fa-star-half-alt" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                                            @else
+                                                                                <i class="far fa-star" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                                            @endif
+                                                                        @endfor
                                                                     </div>
-                                                                </div>
-                                                                <p>Thank you very fast shipping from Poland only 3days.</p>
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <p class="font-xs mr-30">December 4, 2020 at 3:12 pm </p>
+                                                                    @if ($op->media != NULL)
+                                                                        <a class="example-image-link" href="{{ asset('storage/media_review/'.$op->media) }}" data-lightbox="example-1">
+                                                                            <img style="width: 120px; height: 80px; object-fit:cover;" src="{{ asset('storage/media_review/'.$op->media) }}" alt="">
+                                                                        </a>
+                                                                    @endif
+
+                                                                    <p>{{ ucfirst($op->review) }}</p>
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <p class="font-xs mr-30">{{ date("d M Y H:i:s",strtotime($op->updated_at)) }} </p>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <h4 class="mb-30">Customer reviews</h4>
-                                                <div class="d-flex mb-30">
-                                                    <div class="product-rate d-inline-block mr-15">
-                                                        <div class="product-rating" style="width:90%">
-                                                        </div>
+                                                <div class="d-flex justify-content-start mb-30">
+                                                    <div style="margin-top: -8px; margin-right: 10px;">
+                                                        @php
+                                                            $rating = !empty($product->rated) ? $product->rated : 0;
+                                                        @endphp
+                                                        @for($i = 1; $i <= 5; $i++)
+                                                            @if($rating - $i >= 0)
+                                                                <i class="fas fa-star" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                            @elseif($rating - $i < 0 && $rating - $i > -1)
+                                                                <i class="fas fa-star-half-alt" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                            @else
+                                                                <i class="far fa-star" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                            @endif
+                                                        @endfor
                                                     </div>
-                                                    <h6>4.8 out of 5</h6>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>5 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>4 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>3 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>2 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
-                                                </div>
-                                                <div class="progress mb-30">
-                                                    <span>1 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                                    @if ($product->rated == NULL)
+                                                        <h6>0 out of 5</h6>
+                                                    @else
+                                                        <h6>{{ $product->rated }} out of 5</h6>
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         </div>
@@ -177,14 +197,23 @@
                                                             <a href="{{ route('category-shop',$new->category_id) }}">{{ ucwords($new->category->name) }}</a>
                                                         </div>
                                                         <h2><a href="{{ route('product-detail',$new->id) }}">{{ ucwords($new->nama_produk) }}</a></h2>
-                                                        <div class="rating-result">
-
-                                                        </div>
+                                                        @php
+                                                            $rating = !empty($new->rated) ? $new->rated : 0;
+                                                        @endphp
+                                                        @for($i = 1; $i <= 5; $i++)
+                                                            @if($rating - $i >= 0)
+                                                                <i class="fas fa-star" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                            @elseif($rating - $i < 0 && $rating - $i > -1)
+                                                                <i class="fas fa-star-half-alt" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                            @else
+                                                                <i class="far fa-star" style="margin-right: -3px; color: #f6b93b;"></i>
+                                                            @endif
+                                                        @endfor
                                                         <div class="product-price">
                                                             <span>Rp. {{ number_format($new->price,0,",",".") }}</span>
                                                         </div>
                                                         <div class="product-action-1 show">
-                                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="{{ route('add-cart-1') }}?product_id={{ $new->id }}&qty=1"><i class="fi-rs-shopping-bag-add"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>

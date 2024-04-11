@@ -233,5 +233,232 @@ class OrderController extends Controller
         return view('admin.order.index', compact('orders'));
     }
 
+    public function add_shipping(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'order_id' => ['required', 'string'],
+            'shipping_courier' => ['required', 'string', 'max:255'],
+            'shipping_price' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('order')->withErrors($validator)->withInput();
+        }
+        try {
+            $order_id = $request->order_id;
+            $shipping_courier = $request->shipping_courier;
+            $shipping_price = $request->shipping_price;
+
+            Order::where('id', $order_id)->update([
+                'shipping_courier' => $shipping_courier,
+                'shipping_price' => $shipping_price,
+                'status' => 'menunggu pembayaran',
+            ]);
+
+            return redirect()->route('order')->with('success', 'Berhasil input shipping!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
+
+    }
+
+    public function pay_detail($id)
+    {
+        $order = Order::find($id);
+        if($order->status == 'konfirmasi pembayaran'){
+            return view('admin.order.pay-detail', compact('order'));
+        }
+        else{
+            return redirect()->back();
+        }
+
+    }
+
+    public function pay_accept($id)
+    {
+        try {
+            Order::where('id', $id)->update([
+                'status' => 'terbayar',
+            ]);
+
+            return redirect()->route('order')->with('success', 'Berhasil terima pembayaran!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function pay_reject(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'catatan' => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('pay-detail', $id)->withErrors($validator)->withInput();
+        }
+        try {
+            $catatan = $request->catatan;
+
+            Order::where('id', $id)->update([
+                'catatan' => $catatan,
+                'status' => 'ditolak',
+            ]);
+
+            return redirect()->route('order')->with('success', 'Berhasil tolak pembayaran!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function add_resi(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'order_id' => ['required', 'string'],
+            'resi' => ['required', 'string', 'max:255'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('order')->withErrors($validator)->withInput();
+        }
+        try {
+            $order_id = $request->order_id;
+            $resi = $request->resi;
+
+            Order::where('id', $order_id)->update([
+                'resi' => $resi,
+                'status' => 'terkirim',
+            ]);
+
+            return redirect()->route('order')->with('success', 'Berhasil input resi!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function pay($id)
+    {
+        $count_cart = $this->count_cart();
+        $customer = Customer::where('user_id', Auth::user()->id)->first();
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        $carts = Cart::orderBy('created_at', 'desc')->where('customer_id', $customer->id)->get();
+        $order = Order::where('id', $id)->first();
+        $total_cart = Cart::where('customer_id', $customer->id)->sum('total');
+        if ($order->status == 'menunggu pembayaran') {
+            return view('customer.order.pay', compact('categories', 'carts', 'count_cart', 'total_cart', 'customer', 'order'));
+        } else {
+            return redirect()->back();
+        }
+
+    }
+
+    public function pay_process(Request $request,$id){
+        $validator = Validator::make($request->all(), [
+            'nama_bank' => ['required','string', 'max:255'],
+            'no_bank' => ['required', 'numeric'],
+            'pemilik_bank' => ['required', 'string', 'max:255'],
+            'bukti_bayar' => ['required', 'file', 'mimes:jpg,jpeg,png'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('pay-process', ['order' => $id])->withErrors($validator)->withInput();
+        }
+        try {
+            $order = Order::find($id);
+            $customer_id = $order->customer_id;
+            $file = md5(time()).$customer_id.'_Bukti_Bayar_' . $request->file('bukti_bayar')->getClientOriginalName();
+            $path = $request->file('bukti_bayar')->storeAs('public/bukti_bayar', $file);
+            Order::where('id',$id)->update([
+                "nama_bank" => $request->nama_bank,
+                "no_bank" => $request->no_bank,
+                "pemilik_bank" => $request->pemilik_bank,
+                "bukti_bayar" => $file,
+                "status" => 'konfirmasi pembayaran',
+                "tanggal_bayar" => now()
+            ]);
+            return redirect()->route('order-lists')->with('success', 'Pembayaran berhasil! Silahkan menunggu konfirmasi admin!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function order_acc($id)
+    {
+        $count_cart = $this->count_cart();
+        $customer = Customer::where('user_id', Auth::user()->id)->first();
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        $carts = Cart::orderBy('created_at', 'desc')->where('customer_id', $customer->id)->get();
+        $order = Order::where('id', $id)->first();
+        $order_products = OrderProduct::orderBy('created_at', 'desc')->where('order_id',$order->id)->get();
+        $total_cart = Cart::where('customer_id', $customer->id)->sum('total');
+        if ($order->status == 'terkirim') {
+            return view('customer.order.acc', compact('categories', 'carts', 'count_cart', 'total_cart', 'customer', 'order','order_products'));
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function acc_process(Request $request)
+    {
+        $order_id = $request->order_id;
+        $product_ids = $request->product_id;
+        $ratings = $request->rating;
+        $reviews = $request->review;
+
+        if ($request->hasFile('media')) {
+            $validator = Validator::make($request->all(), [
+                'rating.*' => ['required'],
+                'media.*' => ['file', 'mimes:jpg,jpeg,png'],
+            ]);
+        }
+        else{
+            $validator = Validator::make($request->all(), [
+                'rating.*' => ['required'],
+            ]);
+        }
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        try {
+
+            foreach ($product_ids as $index => $product_id) {
+                $file = null;
+
+                if ($request->hasFile('media') && isset($request->file('media')[$index]) && $request->file('media')[$index]->isValid()) {
+                    $file = md5(time()) . '_Media_' . $request->file('media')[$index]->getClientOriginalName();
+                    $path = $request->file('media')[$index]->storeAs('public/media_review', $file);
+                }
+
+                $updateData = [
+                    "rating" => $ratings[$index],
+                    "review" => $reviews[$index],
+                ];
+
+                if ($file) {
+                    $updateData["media"] = $file;
+                }
+
+                OrderProduct::where('order_id', $order_id)
+                ->where('product_id', $product_id)
+                ->update($updateData);
+
+                Order::where('id',$order_id)->update([
+                    "status" => 'diterima'
+                ]);
+
+                $order_product_avg = OrderProduct::where('product_id',$product_id)->avg('rating');
+
+                Product::where('id',$product_id)->update([
+                    'rated' => $order_product_avg
+                ]);
+            }
+
+            return redirect()->route('order-lists')->with('success', 'Berhasil menerima pesanan!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
 
 }

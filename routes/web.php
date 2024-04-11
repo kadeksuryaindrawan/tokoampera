@@ -38,6 +38,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('voucher', VoucherController::class);
     Route::resource('blog', BlogController::class);
     Route::get('/order', [OrderController::class, 'order'])->name('order');
+    Route::post('/add-shipping', [OrderController::class, 'add_shipping'])->name('add-shipping');
+    Route::get('/pay-detail/{id}', [OrderController::class, 'pay_detail'])->name('pay-detail');
+    Route::get('/pay-accept/{id}', [OrderController::class, 'pay_accept'])->name('pay-accept');
+    Route::put('/pay-reject/{id}', [OrderController::class, 'pay_reject'])->name('pay-reject');
+    Route::post('/add-resi', [OrderController::class, 'add_resi'])->name('add-resi');
 });
 
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
@@ -53,7 +58,11 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::resource('customer-address', CustomerAddressController::class);
     Route::post('/checkout-process', [OrderController::class, 'checkout_process'])->name('checkout-process');
     Route::get('/order-lists', [OrderController::class, 'list_order'])->name('order-lists');
+    Route::get('/pay/{id}', [OrderController::class, 'pay'])->name('pay');
+    Route::put('/pay-process/{id}', [OrderController::class, 'pay_process'])->name('pay-process');
     Route::get('/order-history', [OrderController::class, 'history_order'])->name('order-history');
+    Route::get('/order-acc/{id}', [OrderController::class, 'order_acc'])->name('order-acc');
+    Route::put('/acc-process', [OrderController::class, 'acc_process'])->name('acc-process');
 });
 
 Auth::routes([
