@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{ url('/') }}" rel="nofollow">Home</a>
-                    <span></span> Contact
+                    <span></span> {{ __('navbar.contact') }}
                 </div>
             </div>
         </div>
@@ -15,9 +15,9 @@
             <div class="hero-content">
                 <div class="container">
                     <div class="text-center">
-                        <h4 class="text-brand mb-20">Get in touch</h4>
+                        <h4 class="text-brand mb-20">{{ __('content.get_touch') }}</h4>
                         <h1 class="mb-20 wow fadeIn animated font-xxl fw-900">
-                            Hubungi Kami Melalui <br> Kontak <span class="text-style-1">Dibawah</span>
+                            {{ __('content.contact_us') }} <br> {{ __('content.contact_below') }}
                         </h1>
                         <p class="w-50 m-auto wow fadeIn animated">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum quam eius placeat, a quidem mollitia at accusantium reprehenderit pariatur provident nam ratione incidunt magnam sequi.</p>
                     </div>
@@ -28,7 +28,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h4 class="mb-15 text-brand">Shop</h4>
+                        <h4 class="mb-15 text-brand">{{ __('navbar.shop') }}</h4>
                         205 North Michigan Avenue, Suite 810<br>
                         Chicago, 60601, USA<br>
                         <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>

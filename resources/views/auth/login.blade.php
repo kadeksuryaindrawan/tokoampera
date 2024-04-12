@@ -26,14 +26,14 @@
                         <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" width="20%" alt="logo"></a>
                     </div>
 
-                    <h4 class="card-title mb-3">Login</h4>
-                    <p class="mb-4">Silahkan masuk menggunakan akun anda.</p>
+                    <h4 class="card-title mb-3">{{ __('navbar.login') }}</h4>
+                    <p class="mb-4">{{ __('content.please_login') }}</p>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="mb-3">
                             <label class="form-label" for="email">Email</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Masukkan Email Anda">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email...">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                         </div> <!-- form-group// -->
                         <div class="mb-4">
                             <label class="form-label" for="password">Password</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Masukkan Password Anda">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password...">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -52,11 +52,11 @@
                                 @enderror
                         </div> <!-- form-group// -->
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primary w-100"> Login </button>
+                            <button type="submit" class="btn btn-primary w-100"> {{ __('navbar.login') }} </button>
                         </div> <!-- form-group// -->
                     </form>
 
-                    <p class="text-center">Don't have account? <a href="{{ url('/register') }}">Register</a></p>
+                    <p class="text-center">{{ __('content.dont_account') }} <a href="{{ url('/register') }}">{{ __('navbar.register') }}</a></p>
                 </div>
             </div>
         </section>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -39,9 +40,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'nama_lengkap' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'telp' => ['required'],
             'role' => ['required'],
         ]);
 
@@ -49,11 +52,17 @@ class UserController extends Controller
             return redirect()->route('user.create')->withErrors($validator)->withInput();
         }
         try {
-            User::create([
+            $user = User::create([
                 'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
+            ]);
+
+            Customer::create([
+                'user_id' => $user->id,
+                'nama_lengkap' => $request->nama_lengkap,
+                'telp' => $request->telp,
             ]);
             return redirect()->route('user.index')->with('success', 'Berhasil tambah user!');
         } catch (\Throwable $th) {
@@ -80,7 +89,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.user.edit', compact('user'));
+        $customer = Customer::where('user_id',$user->id)->first();
+        return view('admin.user.edit', compact('user','customer'));
     }
 
     /**
@@ -94,14 +104,18 @@ class UserController extends Controller
     {
         if ($user->email == $request->email) {
             $validator = Validator::make($request->all(), [
+                'nama_lengkap' => ['required', 'string', 'max:255'],
                 'username' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255'],
+                'telp' => ['required'],
                 'role' => ['required'],
             ]);
         } else {
             $validator = Validator::make($request->all(), [
+                'nama_lengkap' => ['required', 'string', 'max:255'],
                 'username' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'telp' => ['required'],
                 'role' => ['required'],
             ]);
         }
@@ -116,6 +130,11 @@ class UserController extends Controller
                     'email' => $request->email,
                     'role' => $request->role
                 ]);
+
+                Customer::where('user_id',$user->id)->update([
+                    'nama_lengkap' => $request->nama_lengkap,
+                    'telp' => $request->telp,
+                ]);
             } else {
                 Validator::make($request->all(), [
                     'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -126,6 +145,11 @@ class UserController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'role' => $request->role
+                ]);
+
+                Customer::where('user_id', $user->id)->update([
+                    'nama_lengkap' => $request->nama_lengkap,
+                    'telp' => $request->telp,
                 ]);
             }
             return redirect()->route('user.index')->with('success', 'Berhasil edit user!');
@@ -143,6 +167,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        Customer::where('user_id',$user->id)->delete();
         return redirect()->back()->with('success', 'User berhasil dihapus!');
     }
 }

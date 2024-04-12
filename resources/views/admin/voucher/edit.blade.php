@@ -15,7 +15,7 @@
                             <h4>Form Edit Voucher</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('voucher.update',$voucher->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('vouchers.update',$voucher->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 

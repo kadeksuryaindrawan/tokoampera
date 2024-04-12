@@ -83,8 +83,8 @@
                                                                     @elseif($order->status == 'terkirim')
                                                                         <a onclick="openDetailResiModal('{{ $order->resi }}')" class="dropdown-item">Lihat No Resi</a>
                                                                     @endif
-                                                                    <a href="" class="dropdown-item">Detail</a>
-                                                                    <form action="" method="post" onsubmit="return confirm('Yakin hapus alamat?')">
+                                                                    <a href="{{ route('order-detail',$order->id) }}" class="dropdown-item">Detail</a>
+                                                                    <form action="{{ route('order-delete',$order->id) }}" method="post" onsubmit="return confirm('Yakin hapus order?')">
                                                                         @csrf
                                                                         @method('delete')
                                                                         <button class="dropdown-item"> Hapus</button>

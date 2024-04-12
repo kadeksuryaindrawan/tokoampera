@@ -15,7 +15,7 @@
                             <h4>Form Tambah Voucher</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('voucher.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('vouchers.store') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="row">

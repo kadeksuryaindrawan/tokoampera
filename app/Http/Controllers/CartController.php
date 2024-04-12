@@ -46,12 +46,13 @@ class CartController extends Controller
             }else{
                 $old_qty = $cart->qty;
                 $new_qty = $old_qty + $request->qty;
-
+                $new_total = $new_qty * $price;
                 if ($new_qty > $product->stok) {
                     return redirect()->back()->with('error', 'Jumlah tidak boleh melebihi dari stok yang tersedia!');
                 } else {
                     $cart->update([
-                        "qty" => $new_qty
+                        "qty" => $new_qty,
+                        "total" => $new_total
                     ]);
 
                     return redirect()->back()->with('success', 'Berhasil menambah product ke cart!');

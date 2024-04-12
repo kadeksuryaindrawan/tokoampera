@@ -19,6 +19,14 @@
                                 @csrf
 
                                         <div class="mb-4">
+                                            <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
+                                            <input type="text" placeholder="Masukkan Nama Lengkap" name="nama_lengkap" class="form-control" id="nama_lengkap" required>
+                                            @error('nama_lengkap')
+                                                <div class="text-danger text-sm">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-4">
                                             <label for="username" class="form-label">Username</label>
                                             <input type="text" placeholder="Masukkan Username" name="username" class="form-control" id="username" required>
                                             @error('username')
@@ -44,6 +52,14 @@
                                             <label for="password-confirm" class="form-label">Confirm Password</label>
                                             <input type="password" placeholder="Masukkan Password Konfirmasi" name="password_confirmation" class="form-control" id="password-confirm" required>
                                             @error('password')
+                                                <div class="text-danger text-sm">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="telp" class="form-label">Telp</label>
+                                            <input type="text" placeholder="Masukkan No Telp" name="telp" class="form-control" id="telp" required>
+                                            @error('telp')
                                                 <div class="text-danger text-sm">{{ $message }}</div>
                                             @enderror
                                         </div>

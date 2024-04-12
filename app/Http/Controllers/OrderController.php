@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportPenjualanTahun;
 use App\Models\Blog;
 use App\Models\Cart;
 use App\Models\Category;
@@ -14,6 +15,7 @@ use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -84,19 +86,25 @@ class OrderController extends Controller
 
     public function checkout_process(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'customer_address_id' => ['required'],
-        ]);
+        if(Auth::user()->role == 'customer'){
+            $validator = Validator::make($request->all(), [
+                'customer_address_id' => ['required'],
+            ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
         }
+
         try {
 
-            $customer_address = CustomerAddress::where('id',$request->customer_address_id)->first();
-            $alamat = $customer_address->alamat;
-            $lat = $customer_address->lat;
-            $long = $customer_address->long;
+            if(Auth::user()->role == 'customer'){
+                $customer_address = CustomerAddress::where('id', $request->customer_address_id)->first();
+                $alamat = $customer_address->alamat;
+                $lat = $customer_address->lat;
+                $long = $customer_address->long;
+            }
+
             $customer_id = $request->customer_id;
             $invoice = $this->generateInvoice();
             $total_sebelum_discount = $request->total_sebelum_discount;
@@ -128,18 +136,31 @@ class OrderController extends Controller
                 }
 
                 if($true == TRUE){
-                    $order = Order::create([
-                        "customer_id" => $customer_id,
-                        "invoice" => $invoice,
-                        "total_sebelum_discount" => $total_sebelum_discount,
-                        "total" => $total,
-                        "status" => 'pending',
-                        "alamat" => $alamat,
-                        "lat" => $lat,
-                        "long" => $long,
-                        "voucher" => $voucher,
-                        "discount" => $discount,
-                    ]);
+                    if (Auth::user()->role == 'customer') {
+                        $order = Order::create([
+                            "customer_id" => $customer_id,
+                            "invoice" => $invoice,
+                            "total_sebelum_discount" => $total_sebelum_discount,
+                            "total" => $total,
+                            "status" => 'pending',
+                            "alamat" => $alamat,
+                            "lat" => $lat,
+                            "long" => $long,
+                            "voucher" => $voucher,
+                            "discount" => $discount,
+                        ]);
+                    }else{
+                        $order = Order::create([
+                            "customer_id" => $customer_id,
+                            "invoice" => $invoice,
+                            "total_sebelum_discount" => $total_sebelum_discount,
+                            "total" => $total,
+                            "status" => 'diterima',
+                            "voucher" => $voucher,
+                            "discount" => $discount,
+                        ]);
+                    }
+
 
                     foreach ($carts as $cart) {
                         OrderProduct::create([
@@ -171,16 +192,27 @@ class OrderController extends Controller
                 }
 
                 if($true == TRUE){
-                    $order = Order::create([
-                        "customer_id" => $customer_id,
-                        "invoice" => $invoice,
-                        "total_sebelum_discount" => $total_sebelum_discount,
-                        "total" => $total,
-                        "status" => 'pending',
-                        "alamat" => $alamat,
-                        "lat" => $lat,
-                        "long" => $long,
-                    ]);
+                    if (Auth::user()->role == 'customer') {
+                        $order = Order::create([
+                            "customer_id" => $customer_id,
+                            "invoice" => $invoice,
+                            "total_sebelum_discount" => $total_sebelum_discount,
+                            "total" => $total,
+                            "status" => 'pending',
+                            "alamat" => $alamat,
+                            "lat" => $lat,
+                            "long" => $long,
+                        ]);
+                    }else{
+                        $order = Order::create([
+                            "customer_id" => $customer_id,
+                            "invoice" => $invoice,
+                            "total_sebelum_discount" => $total_sebelum_discount,
+                            "total" => $total,
+                            "status" => 'diterima',
+                        ]);
+                    }
+
 
                     foreach ($carts as $cart) {
                         OrderProduct::create([
@@ -196,7 +228,12 @@ class OrderController extends Controller
 
             if($true == TRUE){
                 Cart::where('customer_id', $customer_id)->delete();
-                return redirect()->route('order-lists')->with('success', 'Sukses checkout! Silahkan menunggu konfirmasi admin!');
+                if (Auth::user()->role == 'customer') {
+                    return redirect()->route('order-lists')->with('success', 'Sukses checkout! Silahkan menunggu konfirmasi admin!');
+                }else{
+                    return redirect()->route('invoice-detail',$order->id)->with('success', 'Sukses Order!');
+                }
+
             }else{
                 return redirect()->back()->with('error', 'Stok product tidak cukup atau stok tidak ada!');
             }
@@ -458,6 +495,53 @@ class OrderController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    public function order_detail($id)
+    {
+        $order = Order::find($id);
+        $order_products = OrderProduct::orderBy('created_at', 'desc')->where('order_id', $order->id)->get();
+        if (Auth::user()->role == 'admin') {
+            return view('admin.order.detail', compact('order','order_products'));
+        } else {
+            $count_cart = $this->count_cart();
+            $customer = Customer::where('user_id', Auth::user()->id)->first();
+            $categories = Category::orderBy('created_at', 'desc')->get();
+            $carts = Cart::orderBy('created_at', 'desc')->where('customer_id', $customer->id)->get();
+            $total_cart = Cart::where('customer_id', $customer->id)->sum('total');
+            return view('customer.order.detail', compact('categories', 'carts', 'count_cart', 'total_cart', 'customer', 'order', 'order_products'));
+        }
+    }
+
+    public function order_delete($id){
+        $order = Order::find($id);
+        if($order->bukti_bayar != NULL){
+            unlink(storage_path('app/public/bukti_bayar/' . $order->bukti_bayar));
+        }
+        $order->delete();
+
+        $order_products = OrderProduct::where('order_id',$id)->get();
+
+        foreach($order_products as $op){
+            if($op->media != NULL){
+                unlink(storage_path('app/public/media_review/' . $op->media));
+            }
+        }
+
+        OrderProduct::where('order_id',$id)->delete();
+
+        return redirect()->back()->with('success', 'Order berhasil dihapus!');
+    }
+
+    public function order_success()
+    {
+        $orders = Order::orderBy('created_at', 'desc')->where('status', 'diterima')->get();
+        return view('admin.order-success.index', compact('orders'));
+    }
+
+    public function exportExcelTahun($year)
+    {
+        return Excel::download(new ExportPenjualanTahun($year), 'data-penjualan-' . $year . '.xlsx');
     }
 
 

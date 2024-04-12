@@ -7,8 +7,8 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{ url('/') }}" rel="nofollow">Home</a>
-                    <span></span> Shop
-                    <span></span> Your Cart
+                    <span></span> {{ __('navbar.shop') }}
+                    <span></span> {{ __('navbar.cart') }}
                 </div>
             </div>
         </div>
@@ -34,10 +34,10 @@
                             <table class="table shopping-summery text-center clean">
                                 <thead>
                                     <tr class="main-heading">
-                                        <th scope="col">Image</th>
+                                        <th scope="col">Img</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Qty</th>
                                         <th scope="col">Subtotal</th>
                                         <th scope="col">Remove</th>
                                     </tr>

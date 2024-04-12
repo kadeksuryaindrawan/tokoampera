@@ -4,21 +4,20 @@
 <head>
     <meta charset="utf-8">
     <title>Art Shop Cempaka Group - {{ ucwords(request()->segment(1)) }}</title>
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="">
-    <meta property="og:type" content="">
-    <meta property="og:url" content="">
-    <meta property="og:image" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin/imgs/theme/favicon.svg') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin') }}/imgs/theme/logo.jpg">
     <!-- Template CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="{{ asset('admin/css/main.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/DataTables/datatables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/lightbox.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/font-awesome/css/all.min.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('admin/js/vendors/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('admin/js/vendors/chart.js') }}"></script>
+    @livewireStyles
 </head>
 
 <body>
@@ -55,8 +54,8 @@
                         <span class="text">Produk</span>
                     </a>
                 </li>
-                <li class="menu-item {{ (request()->segment(1) == 'voucher') ? 'active' : '' }}">
-                    <a class="menu-link" href="{{ route('voucher.index') }}"> <i class="icon material-icons md-local_offer"></i>
+                <li class="menu-item {{ (request()->segment(1) == 'vouchers') ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ route('vouchers.index') }}"> <i class="icon material-icons md-local_offer"></i>
                         <span class="text">Voucher</span>
                     </a>
                 </li>
@@ -70,18 +69,16 @@
                         <span class="text">Order</span>
                     </a>
                 </li>
-
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-transactions-1.html"> <i class="icon material-icons md-monetization_on"></i>
-                        <span class="text">Transactions</span>
+                <li class="menu-item {{ (request()->segment(1) == 'order-success') ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ url('/order-success') }}"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Order Sukses</span>
                     </a>
-                    <div class="submenu">
-                        <a href="page-transactions-1.html">Transaction 1</a>
-                        <a href="page-transactions-2.html">Transaction 2</a>
-                        <a href="page-transactions-details.html">Transaction Details</a>
-                    </div>
                 </li>
-
+                <li class="menu-item {{ (request()->segment(1) == 'pos' || request()->segment(1) == 'pos-history' || request()->segment(1) == 'invoice-detail') ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ url('/pos') }}"> <i class="icon material-icons md-monetization_on"></i>
+                        <span class="text">POS</span>
+                    </a>
+                </li>
             </ul>
 
             <br>
@@ -146,19 +143,20 @@
             </div>
         </footer>
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="{{ asset('admin/js/vendors/jquery-3.6.0.min.js') }}"></script>
+
     <script src="{{ asset('admin/js/vendors/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/js/vendors/select2.min.js') }}"></script>
     <script src="{{ asset('admin/js/vendors/perfect-scrollbar.js') }}"></script>
     <script src="{{ asset('admin/js/vendors/jquery.fullscreen.min.js') }}"></script>
-    <script src="{{ asset('admin/js/vendors/chart.js') }}"></script>
     <script src="{{ asset('admin/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('admin/js/datatables.js') }}"></script>
     <script src="{{ asset('admin/js/lightbox.js') }}"></script>
     <!-- Main Script -->
     <script src="{{ asset('admin/js/main.js') }}" type="text/javascript"></script>
     <script src="{{ asset('admin/js/custom-chart.js') }}" type="text/javascript"></script>
+@livewireScripts
 </body>
 
 </html>

@@ -25,13 +25,13 @@
                     <div class="mb-4 text-center">
                         <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" width="20%" alt="logo"></a>
                     </div>
-                    <h4 class="card-title mb-3">Register</h4>
+                    <h4 class="card-title mb-3">{{ __('navbar.register') }}</h4>
                     <p class="mb-4">Silahkan daftar menggunakan data diri anda.</p>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label" for="nama_lengkap">Nama Lengkap</label>
-                            <input id="nama_lengkap" type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required autocomplete="nama_lengkap" autofocus placeholder="Masukkan Nama Lengkap Anda">
+                            <label class="form-label" for="nama_lengkap">{{ __('content.fullname') }}</label>
+                            <input id="nama_lengkap" type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required autocomplete="nama_lengkap" autofocus placeholder="{{ __('content.fullname') }}...">
 
                                 @error('nama_lengkap')
                                     <span class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
                         </div> <!-- form-group// -->
                         <div class="mb-3">
                             <label class="form-label" for="username">Username</label>
-                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Masukkan Username Anda">
+                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username...">
 
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -52,7 +52,7 @@
 
                         <div class="mb-3">
                             <label class="form-label" for="email">Email</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Masukkan Email Anda">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email...">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                         </div> <!-- form-group// -->
                         <div class="mb-3">
                             <label class="form-label" for="password">Password</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Masukkan Password Anda">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password...">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -71,13 +71,13 @@
                                 @enderror
                         </div> <!-- form-group// -->
                         <div class="mb-4">
-                            <label class="form-label" for="password-confirm">Confirm Password</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Masukkan Ulang Password Anda">
+                            <label class="form-label" for="password-confirm">Re Password</label>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Re Password...">
                         </div> <!-- form-group// -->
 
                         <div class="mb-3">
-                            <label class="form-label" for="telp">No Telp</label>
-                            <input id="telp" type="text" class="form-control @error('telp') is-invalid @enderror" name="telp" value="{{ old('telp') }}" required autocomplete="telp" autofocus placeholder="Masukkan No Telp Anda">
+                            <label class="form-label" for="telp">Hp</label>
+                            <input id="telp" type="number" class="form-control @error('telp') is-invalid @enderror" name="telp" value="{{ old('telp') }}" required autocomplete="telp" autofocus placeholder="Hp...">
 
                                 @error('telp')
                                     <span class="invalid-feedback" role="alert">
@@ -86,11 +86,11 @@
                                 @enderror
                         </div> <!-- form-group// -->
                         <div class="mb-4">
-                            <button type="submit" class="btn btn-primary w-100"> Register </button>
+                            <button type="submit" class="btn btn-primary w-100"> {{ __('navbar.register') }} </button>
                         </div> <!-- form-group// -->
                     </form>
 
-                    <p class="text-center mb-2">Already have an account? <a href="{{ url('/login') }}">Login</a></p>
+                    <p class="text-center mb-2">{{ __('content.already_account') }} <a href="{{ url('/login') }}">{{ __('navbar.login') }}</a></p>
                 </div>
             </div>
         </section>

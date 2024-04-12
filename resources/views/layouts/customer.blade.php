@@ -12,7 +12,7 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('landing/imgs/theme/favicon.svg') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('landing') }}/imgs/theme/logo.jpg">
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('landing/css/main.css?v=3.4') }}">
     <link href="{{ asset('admin/DataTables/datatables.min.css') }}" rel="stylesheet">
@@ -191,32 +191,38 @@
                         <div class="header-info">
                             <ul>
                                 <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                                <li><i class="fi-rs-marker"></i><a  href="page-contact.html">Our location</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-4">
-                        <div class="text-center">
-                            <div id="news-flash" class="d-inline-block">
-                                <ul>
-                                    <li>Get great devices up to 50% off <a href="shop-grid-right.html">View details</a></li>
-                                    <li>Supper Value Deals - Save more with coupons</li>
-                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="shop-grid-right.html">Shop now</a></li>
-                                </ul>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
                                 <li>
-                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
+
+                                    @if (app()->getLocale() == 'id')
+                                        <a class="language-dropdown-active"> <i class="fi-rs-world"></i> Indonesia <i class="fi-rs-angle-small-down"></i></a>
+                                    @endif
+
+                                    @if (app()->getLocale() == 'en')
+                                        <a class="language-dropdown-active"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
+                                    @endif
+
                                     <ul class="language-dropdown">
-                                        <li><a href="#"><img src="{{ asset('landing') }}/imgs/theme/flag-fr.png" alt="">Indonesia</a></li>
+                                        @if (app()->getLocale() == 'id')
+                                            <li><a href="{{ route('locale','en') }}"><img src="{{ asset('landing/imgs/en.png') }}" alt="">En</a></li>
+                                        @endif
+
+                                        @if (app()->getLocale() == 'en')
+                                            <li><a href="{{ route('locale','id') }}"><img src="{{ asset('landing/imgs/id.png') }}" alt="">Id</a></li>
+                                        @endif
+
                                     </ul>
                                 </li>
                                 @if (Auth::check() == false)
-                                    <li><i class="fi-rs-user"></i><a href="{{ url('/login') }}">Log In / Sign Up</a></li>
+                                    <li><i class="fi-rs-user"></i><a href="{{ url('/login') }}">{{ __('navbar.login') }} / {{ __('navbar.register') }}</a></li>
                                 @endif
 
                                 @if (Auth::check() == true)
@@ -224,7 +230,7 @@
                                         <a class="nav-link" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                                            <button class="btn btn-sm radius-xl" style="background-color: #e74c3c; border:none;">Logout</button>
+                                            <button class="btn btn-sm radius-xl" style="background-color: #e74c3c; border:none;">{{ __('navbar.logout') }}</button>
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
@@ -255,7 +261,7 @@
                                     <option>Computer</option>
                                     <option>Electronics</option>
                                     <option> Accessories</option>
-                                    <option>Home & Garden</option>
+                                    <option>{{ __('navbar.home') }} & Garden</option>
                                     <option>Luggage</option>
                                     <option>Shoes</option>
                                     <option>Mother & Kids</option>
@@ -296,7 +302,7 @@
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
                             <a class="categori-button-active" href="#">
-                                <span class="fi-rs-apps"></span> Browse Categories
+                                <span class="fi-rs-apps"></span> {{ __('navbar.browse_categories') }}
                             </a>
                             <div class="categori-dropdown-wrap categori-dropdown-active-large">
                                 <ul>
@@ -304,17 +310,17 @@
                                         <li><a href="{{ route('category-shop',$category->id) }}">{{ ucwords($category->name) }}</a></li>
                                     @endforeach
                                 </ul>
-                                <div class="more_categories">Show more...</div>
+                                <div class="more_categories">{{ __('navbar.show_more') }}...</div>
                             </div>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="{{ (request()->segment(1) == 'home' || request()->segment(1) == '') ? 'active' : '' }}" href="{{ url('/') }}">Home</a></li>
-                                    <li><a class="{{ (request()->segment(1) == 'shop' || request()->segment(1) == 'product-detail' || request()->segment(1) == 'cart' || request()->segment(1) == 'category-shop' || request()->segment(1) == 'checkout' || request()->segment(1) == 'customer-address') ? 'active' : '' }}" href="{{ url('/shop') }}">Shop</a></li>
-                                    <li><a class="{{ (request()->segment(1) == 'blogs' || request()->segment(1) == 'blog-detail') ? 'active' : '' }}" href="{{ url('/blogs') }}">Blog</a></li>
-                                    <li><a class="{{ (request()->segment(1) == 'contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Contact</a></li>
-                                    <li><a class="{{ (request()->segment(1) == 'order-lists' || request()->segment(1) == 'order-history' || request()->segment(1) == 'pay' || request()->segment(1) == 'order-acc') ? 'active' : '' }}" href="{{ url('/order-lists') }}">Order</a></li>
+                                    <li><a class="{{ (request()->segment(1) == 'home' || request()->segment(1) == '') ? 'active' : '' }}" href="{{ url('/') }}">{{ __('navbar.home') }}</a></li>
+                                    <li><a class="{{ (request()->segment(1) == 'shop' || request()->segment(1) == 'product-detail' || request()->segment(1) == 'cart' || request()->segment(1) == 'category-shop' || request()->segment(1) == 'checkout' || request()->segment(1) == 'customer-address') ? 'active' : '' }}" href="{{ url('/shop') }}">{{ __('navbar.shop') }}</a></li>
+                                    <li><a class="{{ (request()->segment(1) == 'blogs' || request()->segment(1) == 'blog-detail') ? 'active' : '' }}" href="{{ url('/blogs') }}">{{ __('navbar.blog') }}</a></li>
+                                    <li><a class="{{ (request()->segment(1) == 'contact') ? 'active' : '' }}" href="{{ url('/contact') }}">{{ __('navbar.contact') }}</a></li>
+                                    <li><a class="{{ (request()->segment(1) == 'order-lists' || request()->segment(1) == 'order-history' || request()->segment(1) == 'pay' || request()->segment(1) == 'order-acc') ? 'active' : '' }}" href="{{ url('/order-lists') }}">{{ __('navbar.order') }}</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -332,9 +338,11 @@
                                 </a> --}}
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
+                                <a class="mini-cart-icon" href="{{ url('/cart') }}">
                                     <img alt="Evara" src="{{ asset('landing') }}/imgs/theme/icons/icon-cart.svg">
-                                    <span class="pro-count white">2</span>
+                                    @if (Auth::check() == true)
+                                        <span class="pro-count white">{{ $count_cart }}</span>
+                                    @endif
                                 </a>
 
                             </div>
@@ -374,7 +382,7 @@
                 <div class="mobile-menu-wrap mobile-header-border">
                     <div class="main-categori-wrap mobile-header-border">
                         <a class="categori-button-active-2" href="#">
-                            <span class="fi-rs-apps"></span> Browse Categories
+                            <span class="fi-rs-apps"></span> {{ __('navbar.browse_categories') }}
                         </a>
                         <div class="categori-dropdown-wrap categori-dropdown-active-small">
                             <ul>
@@ -388,20 +396,20 @@
                     <!-- mobile menu start -->
                     <nav>
                         <ul class="mobile-menu">
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/home') }}">Home</a>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/home') }}">{{ __('navbar.home') }}</a>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/shop') }}">Shop</a>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/shop') }}">{{ __('navbar.shop') }}</a>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/blogs') }}">Blog</a>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/blogs') }}">{{ __('navbar.blog') }}</a>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/contact') }}">Contact</a>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/contact') }}">{{ __('navbar.contact') }}</a>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/order-lists') }}">Order</a>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/order-lists') }}">{{ __('navbar.order') }}</a>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">{{ __('navbar.language') }}</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">Indonesia</a></li>
+                                    <li><a href="{{ route('locale','en') }}">En</a></li>
+                                    <li><a href="{{ route('locale','id') }}">Id</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -409,19 +417,16 @@
                     <!-- mobile menu end -->
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
-                    <div class="single-mobile-header-info mt-30">
-                        <a  href="page-contact.html"> Our location </a>
-                    </div>
                     <div class="single-mobile-header-info">
                         @if (Auth::check() == false)
-                                    <a href="{{ url('/login') }}">Log In / Sign Up </a>
+                                    <a href="{{ url('/login') }}">{{ __('navbar.login') }} / {{ __('navbar.register') }} </a>
                                 @endif
 
                                 @if (Auth::check() == true)
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                                            <button class="btn btn-sm radius-xl" style="background-color: #e74c3c; border:none;">Logout</button>
+                                            <button class="btn btn-sm radius-xl" style="background-color: #e74c3c; border:none;">{{ __('navbar.logout') }}</button>
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
@@ -452,7 +457,7 @@
                     <div class="col-lg-12 mb-md-12 mb-lg-0">
                         <div class="row align-items-center text-center">
                             <div class="col">
-                                <h4 class="font-size-20 mb-0 ml-3">Anda Tertarik? Silahkan <a href="{{ url('login') }}">Login/Register</a></h4>
+                                <h4 class="font-size-20 mb-0 ml-3">{{ __('content.interested') }} <a href="{{ url('login') }}">{{ __('navbar.login') }}/{{ __('navbar.register') }}</a></h4>
                             </div>
                         </div>
                     </div>
@@ -468,7 +473,7 @@
                             <div class="logo wow fadeIn animated">
                                 <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" style="width: 15%;" alt="logo"></a>
                             </div>
-                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
+                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">{{ __('navbar.contact') }}</h5>
                             <p class="wow fadeIn animated">
                                 <strong>Address: </strong>562 Wellington Road, Street 32, San Francisco
                             </p>
@@ -491,18 +496,18 @@
                     <div class="col-lg-2 col-md-4">
                         <h5 class="widget-title wow fadeIn animated">Menu</h5>
                         <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                            <li><a href="{{ url('/') }}">Home</a></li>
-                            <li><a href="{{ url('/shop') }}">Shop</a></li>
-                            <li><a href="{{ url('/blogs') }}">Blog</a></li>
-                            <li><a href="{{ url('/contact') }}">Contact Us</a></li>
+                            <li><a href="{{ url('/') }}">{{ __('navbar.home') }}</a></li>
+                            <li><a href="{{ url('/shop') }}">{{ __('navbar.shop') }}</a></li>
+                            <li><a href="{{ url('/blogs') }}">{{ __('navbar.blog') }}</a></li>
+                            <li><a href="{{ url('/contact') }}">{{ __('navbar.contact') }}</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-2 col-md-4">
-                        <h5 class="widget-title wow fadeIn animated">My Account</h5>
+                        <h5 class="widget-title wow fadeIn animated">{{ __('navbar.my_account') }}</h5>
                         <ul class="footer-list wow fadeIn animated">
-                            <li><a href="{{ url('/login') }}">Sign In</a></li>
-                            <li><a href="{{ url('/cart') }}">View Cart</a></li>
-                            <li><a href="{{ url('/order-lists') }}">Order</a></li>
+                            <li><a href="{{ url('/login') }}">{{ __('navbar.login') }}</a></li>
+                            <li><a href="{{ url('/cart') }}">{{ __('navbar.cart') }}</a></li>
+                            <li><a href="{{ url('/order-lists') }}">{{ __('navbar.order') }}</a></li>
                         </ul>
                     </div>
 

@@ -22,7 +22,7 @@
                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <h4>Voucher</h4>
-                                        <a href="{{ route('voucher.create') }}"><button class="btn btn-primary">Tambah Voucher</button></a>
+                                        <a href="{{ route('vouchers.create') }}"><button class="btn btn-primary">Tambah Voucher</button></a>
                                     </div>
                                     <div style="overflow-x: scroll;">
                                         <table id="zero-conf" class="table" style="width:100%">
@@ -64,9 +64,9 @@
                                                                     <i class="icon material-icons md-menu"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                    <a href="{{ route('voucher.show',$voucher->id) }}" class="dropdown-item">Detail</a>
-                                                                    <a href="{{ route('voucher.edit',$voucher->id) }}" class="dropdown-item">Edit</a>
-                                                                    <form action="{{route('voucher.destroy',$voucher->id)}}" method="post" onsubmit="return confirm('Yakin hapus voucher?')">
+                                                                    <a href="{{ route('vouchers.show',$voucher->id) }}" class="dropdown-item">Detail</a>
+                                                                    <a href="{{ route('vouchers.edit',$voucher->id) }}" class="dropdown-item">Edit</a>
+                                                                    <form action="{{route('vouchers.destroy',$voucher->id)}}" method="post" onsubmit="return confirm('Yakin hapus voucher?')">
                                                                         @csrf
                                                                         @method('delete')
                                                                         <button class="dropdown-item"> Hapus</button>

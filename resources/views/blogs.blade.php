@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{ url('/') }}" rel="nofollow">Home</a>
-                    <span></span> Blog
+                    <span></span> {{ __('navbar.blog') }}
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="single-header mb-50 text-center">
-                            <h1 class="font-xxl text-brand">Our Blog</h1>
+                            <h1 class="font-xxl text-brand">{{ __('content.our_blog') }}</h1>
                         </div>
                         <div class="loop-grid pr-30">
                             <div class="row">

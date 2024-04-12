@@ -1,28 +1,19 @@
 @extends('layouts.admin')
 
 @section('content')
-
-<section class="content-main">
+        <section class="content-main">
             <div class="content-header">
                 <div>
                     <h2 class="content-title card-title">Dashboard </h2>
-                    <p>Whole data about your business here</p>
-                </div>
-                <div>
-                    <a href="#" class="btn btn-primary"><i class="text-muted material-icons md-post_add"></i>Create report</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card card-body mb-4">
                         <article class="icontext">
-                            <span class="icon icon-sm rounded-circle bg-primary-light"><i class="text-primary material-icons md-monetization_on"></i></span>
                             <div class="text">
-                                <h6 class="mb-1 card-title">Revenue</h6>
-                                <span>$13,456.5</span>
-                                <span class="text-sm">
-                                    Shipping fees are not included
-                                </span>
+                                <h6 class="mb-1 card-title">Jumlah Kategori</h6>
+                                <span>{{ $category_count }}</span>
                             </div>
                         </article>
                     </div>
@@ -30,12 +21,9 @@
                 <div class="col-lg-3">
                     <div class="card card-body mb-4">
                         <article class="icontext">
-                            <span class="icon icon-sm rounded-circle bg-success-light"><i class="text-success material-icons md-local_shipping"></i></span>
                             <div class="text">
-                                <h6 class="mb-1 card-title">Orders</h6> <span>53.668</span>
-                                <span class="text-sm">
-                                    Excluding orders in transit
-                                </span>
+                                <h6 class="mb-1 card-title">Jumlah Produk</h6>
+                                <span>{{ $product_count }}</span>
                             </div>
                         </article>
                     </div>
@@ -43,12 +31,9 @@
                 <div class="col-lg-3">
                     <div class="card card-body mb-4">
                         <article class="icontext">
-                            <span class="icon icon-sm rounded-circle bg-warning-light"><i class="text-warning material-icons md-qr_code"></i></span>
                             <div class="text">
-                                <h6 class="mb-1 card-title">Products</h6> <span>9.856</span>
-                                <span class="text-sm">
-                                    In 19 Categories
-                                </span>
+                                <h6 class="mb-1 card-title">Jumlah Voucher</h6>
+                                <span>{{ $voucher_count }}</span>
                             </div>
                         </article>
                     </div>
@@ -56,224 +41,198 @@
                 <div class="col-lg-3">
                     <div class="card card-body mb-4">
                         <article class="icontext">
-                            <span class="icon icon-sm rounded-circle bg-info-light"><i class="text-info material-icons md-shopping_basket"></i></span>
                             <div class="text">
-                                <h6 class="mb-1 card-title">Monthly Earning</h6> <span>$6,982</span>
-                                <span class="text-sm">
-                                    Based in your local time.
-                                </span>
+                                <h6 class="mb-1 card-title">Jumlah Blog</h6>
+                                <span>{{ $blog_count }}</span>
                             </div>
                         </article>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-8 col-lg-12">
-                    <div class="card mb-4">
-                        <article class="card-body">
-                            <h5 class="card-title">Sale statistics</h5>
-                            <canvas id="myChart" height="120px"></canvas>
-                        </article>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="card mb-4">
-                                <article class="card-body">
-                                    <h5 class="card-title">New Members</h5>
-                                    <div class="new-member-list">
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="assets/imgs/people/avatar4.jpg" alt="" class="avatar">
-                                                <div>
-                                                    <h6>Patric Adams</h6>
-                                                    <p class="text-muted font-xs">
-                                                        Sanfrancisco
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="btn btn-xs"><i class="material-icons md-add"></i> Add</a>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="assets/imgs/people/avatar2.jpg" alt="" class="avatar">
-                                                <div>
-                                                    <h6>Dilan Specter</h6>
-                                                    <p class="text-muted font-xs">
-                                                        Sanfrancisco
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="btn btn-xs"><i class="material-icons md-add"></i> Add</a>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="assets/imgs/people/avatar3.jpg" alt="" class="avatar">
-                                                <div>
-                                                    <h6>Tomas Baker</h6>
-                                                    <p class="text-muted font-xs">
-                                                        Sanfrancisco
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="btn btn-xs"><i class="material-icons md-add"></i> Add</a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="card mb-4">
-                                <article class="card-body">
-                                    <h5 class="card-title">Recent activities</h5>
-                                    <ul class="verti-timeline list-unstyled font-sm">
-                                        <li class="event-list">
-                                            <div class="event-timeline-dot">
-                                                <i class="material-icons md-play_circle_outline font-xxl"></i>
-                                            </div>
-                                            <div class="media">
-                                                <div class="me-3">
-                                                    <h6><span>Today</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div>
-                                                        Lorem ipsum dolor sit amet consectetur
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="event-list active">
-                                            <div class="event-timeline-dot">
-                                                <i class="material-icons md-play_circle_outline font-xxl animation-fade-right"></i>
-                                            </div>
-                                            <div class="media">
-                                                <div class="me-3">
-                                                    <h6><span>17 May</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div>
-                                                        Debitis nesciunt voluptatum dicta reprehenderit
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="event-list">
-                                            <div class="event-timeline-dot">
-                                                <i class="material-icons md-play_circle_outline font-xxl"></i>
-                                            </div>
-                                            <div class="media">
-                                                <div class="me-3">
-                                                    <h6><span>13 May</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div>
-                                                        Accusamus voluptatibus voluptas.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="event-list">
-                                            <div class="event-timeline-dot">
-                                                <i class="material-icons md-play_circle_outline font-xxl"></i>
-                                            </div>
-                                            <div class="media">
-                                                <div class="me-3">
-                                                    <h6><span>05 April</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div>
-                                                        At vero eos et accusamus et iusto odio dignissi
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="event-list">
-                                            <div class="event-timeline-dot">
-                                                <i class="material-icons md-play_circle_outline font-xxl"></i>
-                                            </div>
-                                            <div class="media">
-                                                <div class="me-3">
-                                                    <h6><span>26 Mar</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div>
-                                                        Responded to need “Volunteer Activities
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-12">
-                    <div class="card mb-4">
-                        <article class="card-body">
-                            <h5 class="card-title">Revenue Base on Area</h5>
-                            <canvas id="myChart2" height="217"></canvas>
-                        </article>
-                    </div>
-                    <div class="card mb-4">
-                        <article class="card-body">
-                            <h5 class="card-title">Marketing Chanel</h5>
-                            <span class="text-muted font-xs">Facebook</span>
-                            <div class="progress mb-3">
-                                <div class="progress-bar" role="progressbar" style="width: 15%">15%</div>
-                            </div>
-                            <span class="text-muted font-xs">Instagram</span>
-                            <div class="progress mb-3">
-                                <div class="progress-bar" role="progressbar" style="width: 65%">65% </div>
-                            </div>
-                            <span class="text-muted font-xs">Google</span>
-                            <div class="progress mb-3">
-                                <div class="progress-bar" role="progressbar" style="width: 51%"> 51% </div>
-                            </div>
-                            <span class="text-muted font-xs">Twitter</span>
-                            <div class="progress mb-3">
-                                <div class="progress-bar" role="progressbar" style="width: 80%"> 80%</div>
-                            </div>
-                            <span class="text-muted font-xs">Other</span>
-                            <div class="progress mb-3">
-                                <div class="progress-bar" role="progressbar" style="width: 80%"> 80%</div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-5">
-                                        <h4>Galeri</h4>
-                                    </div>
-                                    <div style="overflow-x: scroll">
-                                        <table id="zero-conf" class="table" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Judul</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>adwa</td>
-                                                    <td>dw</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
 
-                                </div>
+            <livewire:year-sort :year="$year"/>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                                <h4>Latest Order</h4>
+                                            </div>
+                                            <div style="overflow-x: scroll;">
+                                                <table id="zero-conf" class="table" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Invoice</th>
+                                                            <th>Nama Customer</th>
+                                                            <th>Total</th>
+                                                            <th>Alamat</th>
+                                                            <th>Kurir</th>
+                                                            <th>Ongkir</th>
+                                                            <th>Status</th>
+                                                            <th>Tanggal Checkout</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $no=1;
+                                                        @endphp
+                                                        @foreach ($orders as $order)
+                                                            <tr>
+                                                                <td>{{ $no++ }}</td>
+                                                                <td>{{ $order->invoice }}</td>
+                                                                <td>{{ ucwords($order->customer->nama_lengkap) }}</td>
+                                                                <td>Rp. {{ number_format($order->total,0,",",".") }}</td>
+                                                                <td><a target="_blank" href="https://www.google.com/maps?q={{ $order->lat}},{{ $order->long}}"><button class="btn btn-primary btn-sm">Lihat</button></a></td>
+                                                                @if ($order->shipping_price == NULL)
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                @else
+                                                                    <td>{{ $order->shipping_courier }}</td>
+                                                                    <td class="text-danger">Rp. {{ number_format($order->shipping_price,0,",",".") }}</td>
+                                                                @endif
+
+                                                                <td>
+                                                                    @if ($order->status == 'pending' || $order->status == 'menunggu pembayaran' || $order->status == 'konfirmasi pembayaran')
+                                                                        <span class="badge rounded-pill alert-warning text-warning">{{ ucwords($order->status) }}</span>
+                                                                    @elseif ($order->status == 'terbayar' || $order->status == 'terkirim' || $order->status == 'diterima')
+                                                                        <span class="badge rounded-pill alert-success text-success">{{ ucwords($order->status) }}</span>
+                                                                    @else
+                                                                        <span class="badge rounded-pill alert-danger text-danger">{{ ucwords($order->status) }}</span>
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{ date("d M Y H:i:s",strtotime($order->created_at)) }}</td>
+                                                                <td>
+                                                                    <div class="dropdown">
+                                                                        <button class="btn btn-sm btn-primary" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                            <i class="icon material-icons md-menu"></i>
+                                                                        </button>
+                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                                            @if ($order->status == 'pending')
+                                                                                <a onclick="openShippingModal('{{ $order->id }}')" class="dropdown-item">Input Shipping</a>
+                                                                            @elseif ($order->status == 'konfirmasi pembayaran')
+                                                                                <a href="{{ route('pay-detail',$order->id) }}" class="dropdown-item">Lihat Pembayaran</a>
+                                                                            @elseif ($order->status == 'terbayar')
+                                                                                <a onclick="openResiModal('{{ $order->id }}')" class="dropdown-item">Input No Resi</a>
+                                                                            @elseif($order->status == 'terkirim')
+                                                                                <a onclick="openDetailResiModal('{{ $order->resi }}')" class="dropdown-item">Lihat No Resi</a>
+                                                                            @endif
+                                                                            <a href="{{ route('order-detail',$order->id) }}" class="dropdown-item">Detail</a>
+                                                                            <form action="{{ route('order-delete',$order->id) }}" method="post" onsubmit="return confirm('Yakin hapus order?')">
+                                                                                @csrf
+                                                                                @method('delete')
+                                                                                <button class="dropdown-item"> Hapus</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                            </tr>
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+
+                    </div>
+                </div>
             </div>
 
         </section> <!-- content-main end// -->
 
+    <script type="text/javascript">
+        (function ($) {
+            "use strict";
+
+            /*Sale statistics Chart*/
+            let chart;
+            if ($('#myChart').length) {
+                var ctx = document.getElementById('myChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        datasets: [
+
+                            {
+                                label: 'Penjualan',
+                                tension: 0.3,
+                                fill: true,
+                                backgroundColor: 'rgba(4, 209, 130, 0.6)',
+                                borderColor: 'rgb(4, 209, 130)',
+                                data: [{{ $januari }}, {{ $februari }}, {{ $maret }}, {{ $april }}, {{ $mei }}, {{ $juni }}, {{ $juli }}, {{ $agustus }}, {{ $september }}, {{ $oktober }}, {{ $november }}, {{ $desember }}]
+                            }
+
+                        ]
+                    },
+                    options: {
+                        plugins: {
+                        legend: {
+                            labels: {
+                            usePointStyle: true,
+                            },
+                        }
+                        }
+                    }
+                });
+
+
+            } //End if
+
+            document.addEventListener('livewire:load', function () {
+                    Livewire.hook('message.processed', (message, component) => {
+                        const updateChartEvent = message.response.effects.dispatches.find(event => event.event === 'updateChart');
+
+                        if (updateChartEvent) {
+                            //console.log(updateChartEvent.data.april);
+                            chart.destroy();
+                            if ($('#myChart').length) {
+                                var ctx = document.getElementById('myChart').getContext('2d');
+                                chart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                                        datasets: [
+
+                                            {
+                                                label: 'Penjualan',
+                                                tension: 0.3,
+                                                fill: true,
+                                                backgroundColor: 'rgba(4, 209, 130, 0.6)',
+                                                borderColor: 'rgb(4, 209, 130)',
+                                                data: [updateChartEvent.data.januari,updateChartEvent.data.februari,updateChartEvent.data.maret,updateChartEvent.data.april,updateChartEvent.data.mei,updateChartEvent.data.juni,updateChartEvent.data.juli,updateChartEvent.data.agustus,updateChartEvent.data.september,updateChartEvent.data.oktober,updateChartEvent.data.november,updateChartEvent.data.desember]
+                                            }
+
+                                        ]
+                                    },
+                                    options: {
+                                        plugins: {
+                                        legend: {
+                                            labels: {
+                                            usePointStyle: true,
+                                            },
+                                        }
+                                        }
+                                    }
+                                });
+
+
+                            } //End if
+                        }
+                    });
+                });
+
+
+
+        })(jQuery);
+
+
+
+    </script>
 
 @endsection
+

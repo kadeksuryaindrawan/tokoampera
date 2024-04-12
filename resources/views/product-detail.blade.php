@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{ url('/') }}" rel="nofollow">Home</a>
-                    <span></span> Shop
+                    <span></span> {{ __('navbar.shop') }}
                     <span></span> {{ ucwords($product->nama_produk) }}
                 </div>
             </div>
@@ -50,7 +50,7 @@
                                         <h2 class="title-detail">{{ ucwords($product->nama_produk) }}</h2>
                                         <div class="product-detail-rating">
                                             <div class="pro-details-brand">
-                                                <span> Category : <a href="{{ route('category-shop',$product->category_id) }}">{{ ucwords($product->category->name) }}</a></span>
+                                                <span> {{ __('content.category') }} : <a href="{{ route('category-shop',$product->category_id) }}">{{ ucwords($product->category->name) }}</a></span>
                                             </div>
                                             <div class="d-flex justify-content-end">
                                                 <div>
@@ -67,7 +67,7 @@
                                                         @endif
                                                     @endfor
                                                 </div>
-                                                <span class="font-small ml-5 text-muted"> ({{ $rater }} reviews)</span>
+                                                <span class="font-small ml-5 text-muted"> ({{ $rater }} {{ __('content.reviews') }})</span>
                                             </div>
                                         </div>
                                         <div class="clearfix product-price-cover">
@@ -91,7 +91,7 @@
                                             </form>
 
                                         <ul class="product-meta font-xs color-grey mt-50">
-                                            <li>Availability:<span class="in-stock text-success ml-5">{{ $product->stok }} Items In Stock</span></li>
+                                            <li>{{ __('content.stock') }} :<span class="in-stock text-success ml-5">{{ $product->stok }}</span></li>
                                         </ul>
                                     </div>
                                     <!-- Detail Info -->
@@ -99,11 +99,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 m-auto entry-main-content">
-                                    <h2 class="section-title style-1 mb-30">Description</h2>
+                                    <h2 class="section-title style-1 mb-30">Desc</h2>
                                     <div class="description mb-50">
                                         <p>{{ ucfirst($product->deskripsi) }}</p>
                                     </div>
-                                    <h3 class="section-title style-1 mb-30 mt-30">Reviews ({{ $rater }})</h3>
+                                    <h3 class="section-title style-1 mb-30 mt-30">{{ ucfirst(__('content.reviews')) }} ({{ $rater }})</h3>
                                     <!--Comments-->
                                     <div class="comments-area style-2">
                                         <div class="row">
@@ -148,7 +148,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
-                                                <h4 class="mb-30">Customer reviews</h4>
+                                                <h4 class="mb-30">{{ ucfirst(__('content.reviews')) }} Customer </h4>
                                                 <div class="d-flex justify-content-start mb-30">
                                                     <div style="margin-top: -8px; margin-right: 10px;">
                                                         @php
@@ -178,7 +178,7 @@
                             </div>
                             <div class="row mt-60">
                                 <div class="col-12">
-                                    <h3 class="section-title style-1 mb-30">Related products</h3>
+                                    <h3 class="section-title style-1 mb-30">{{ __('content.related') }}</h3>
                                 </div>
                                 <div class="col-12">
                                     <div class="row related-products">

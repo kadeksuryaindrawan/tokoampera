@@ -6,9 +6,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerAddressController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
+use App\Http\Livewire\YearSort;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +25,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('locale/{locale}', function ($locale) {
+    session()->put('locale', $locale);;
+    return redirect()->back();
+})->name('locale');
+
 Route::get('/', [LandingController::class, 'index']);
 Route::get('/shop', [LandingController::class, 'shop']);
 Route::get('/category-shop/{id}', [LandingController::class, 'category_shop'])->name('category-shop');
@@ -35,7 +42,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('user', UserController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
-    Route::resource('voucher', VoucherController::class);
+    Route::resource('vouchers', VoucherController::class);
     Route::resource('blog', BlogController::class);
     Route::get('/order', [OrderController::class, 'order'])->name('order');
     Route::post('/add-shipping', [OrderController::class, 'add_shipping'])->name('add-shipping');
@@ -43,20 +50,29 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pay-accept/{id}', [OrderController::class, 'pay_accept'])->name('pay-accept');
     Route::put('/pay-reject/{id}', [OrderController::class, 'pay_reject'])->name('pay-reject');
     Route::post('/add-resi', [OrderController::class, 'add_resi'])->name('add-resi');
+    Route::delete('/order-delete/{id}', [OrderController::class, 'order_delete'])->name('order-delete');
+    Route::get('/order-success', [OrderController::class, 'order_success'])->name('order-success');
+    Route::get('/pos', [POSController::class, 'index'])->name('pos');
+    Route::get('/pos-history', [POSController::class, 'pos_history'])->name('pos-history');
+    Route::get('/invoice-detail/{id}', [POSController::class, 'invoice_detail'])->name('invoice-detail');
+    Route::get('/export-pdf-invoice/{id}', [POSController::class, 'exportPdfInvoice'])->name('export-pdf-invoice');
+    Route::get('/export-excel-penjualan-tahun/{year}', [OrderController::class, 'exportExcelTahun'])->name('export-excel-penjualan-tahun');
 });
 
+Route::get('/order-detail/{id}', [OrderController::class, 'order_detail'])->name('order-detail')->middleware('auth');
+Route::post('/add-cart', [CartController::class, 'add'])->name('add-cart')->middleware('auth');
+Route::delete('/clear-cart', [CartController::class, 'clear'])->name('clear-cart')->middleware('auth');
+Route::delete('/delete-cart/{id}', [CartController::class, 'delete'])->name('delete-cart')->middleware('auth');
+Route::put('/update-cart/{id}', [CartController::class, 'update'])->name('update-cart')->middleware('auth');
+Route::post('/voucher', [OrderController::class, 'voucher'])->name('voucher')->middleware('auth');
+Route::post('/voucher-destroy', [OrderController::class, 'voucher_destroy'])->name('voucher-destroy')->middleware('auth');
+Route::post('/checkout-process', [OrderController::class, 'checkout_process'])->name('checkout-process')->middleware('auth');
+
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
-    Route::post('/add-cart', [CartController::class, 'add'])->name('add-cart');
     Route::get('/add-cart-1', [CartController::class, 'add'])->name('add-cart-1');
-    Route::delete('/clear-cart', [CartController::class, 'clear'])->name('clear-cart');
-    Route::delete('/delete-cart/{id}', [CartController::class, 'delete'])->name('delete-cart');
-    Route::put('/update-cart/{id}', [CartController::class, 'update'])->name('update-cart');
     Route::get('/cart', [LandingController::class, 'cart']);
     Route::get('/checkout', [OrderController::class, 'index']);
-    Route::post('/voucher', [OrderController::class, 'voucher'])->name('voucher');
-    Route::post('/voucher-destroy', [OrderController::class, 'voucher_destroy'])->name('voucher-destroy');
     Route::resource('customer-address', CustomerAddressController::class);
-    Route::post('/checkout-process', [OrderController::class, 'checkout_process'])->name('checkout-process');
     Route::get('/order-lists', [OrderController::class, 'list_order'])->name('order-lists');
     Route::get('/pay/{id}', [OrderController::class, 'pay'])->name('pay');
     Route::put('/pay-process/{id}', [OrderController::class, 'pay_process'])->name('pay-process');

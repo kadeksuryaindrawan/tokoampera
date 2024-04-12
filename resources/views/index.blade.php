@@ -10,31 +10,11 @@
                         <div class="row align-items-center slider-animated-1">
                             <div class="col-lg-5 col-md-6">
                                 <div class="hero-slider-content-2">
-                                    <h4 class="animated">Trade-in offer</h4>
-                                    <h2 class="animated fw-900">Supper value deals</h2>
-                                    <h1 class="animated fw-900 text-brand">On all products</h1>
-                                    <p class="animated">Save more with coupons & up to 70% off</p>
-                                    <a class="animated btn btn-brush btn-brush-3" href="{{ url('/shop') }}"> Shop Now </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 col-md-6 d-none d-md-block">
-                                <div class="single-slider-img single-slider-img-1">
-                                    <img style="width: 800px; height:500px; object-fit:cover" class="animated slider-1-1" src="{{ asset('landing') }}/imgs/1.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-hero-slider single-animation-wrap">
-                    <div class="container">
-                        <div class="row align-items-center slider-animated-1">
-                            <div class="col-lg-5 col-md-6">
-                                <div class="hero-slider-content-2">
-                                    <h4 class="animated">Hot promotions</h4>
-                                    <h2 class="animated fw-900">Fashion Trending</h2>
-                                    <h1 class="animated fw-900 text-7">Great Collection</h1>
-                                    <p class="animated">Save more with coupons & up to 20% off</p>
-                                    <a class="animated btn btn-brush btn-brush-2" href="{{ url('/shop') }}"> Shop Now </a>
+                                    <h4 class="animated">{{ __('content.hot_promo') }}</h4>
+                                    <h2 class="animated fw-900">{{ __('content.trend') }}</h2>
+                                    <h1 class="animated fw-900 text-7">{{ __('content.great') }}</h1>
+                                    <p class="animated">{{ __('content.save') }}</p>
+                                    <a class="animated btn btn-brush btn-brush-2" href="{{ url('/shop') }}"> {{ __('content.shop_now') }} </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6 d-none d-md-block">
@@ -50,11 +30,11 @@
                         <div class="row align-items-center slider-animated-1">
                             <div class="col-lg-5 col-md-6">
                                 <div class="hero-slider-content-2">
-                                    <h4 class="animated">Upcoming Offer</h4>
-                                    <h2 class="animated fw-900">Big Deals From</h2>
-                                    <h1 class="animated fw-900 text-8">Manufacturer</h1>
-                                    <p class="animated">Clothing, Shoes, Bags, Wallets...</p>
-                                    <a class="animated btn btn-brush btn-brush-1" href="{{ url('/shop') }}"> Shop Now </a>
+                                    <h4 class="animated">{{ __('content.upcoming') }}</h4>
+                                    <h2 class="animated fw-900">{{ __('content.big_deals') }}</h2>
+                                    <h1 class="animated fw-900 text-8">{{ __('content.painter') }}</h1>
+                                    <p class="animated">{{ __('content.many_categories') }}</p>
+                                    <a class="animated btn btn-brush btn-brush-1" href="{{ url('/shop') }}"> {{ __('content.shop_now') }} </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6 d-none d-md-block">
@@ -74,25 +54,25 @@
                     <div class="col-lg-3">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('landing') }}/imgs/theme/icons/feature-1.png" alt="">
-                            <h4 class="bg-1">Free Shipping</h4>
+                            <h4 class="bg-1">{{ __('content.shipping') }}</h4>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('landing') }}/imgs/theme/icons/feature-2.png" alt="">
-                            <h4 class="bg-3">Online Order</h4>
+                            <h4 class="bg-3">{{ __('content.online') }}</h4>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('landing') }}/imgs/theme/icons/feature-3.png" alt="">
-                            <h4 class="bg-2">Save Money</h4>
+                            <h4 class="bg-2">{{ __('content.save_money') }}</h4>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('landing') }}/imgs/theme/icons/feature-4.png" alt="">
-                            <h4 class="bg-4">Promotions</h4>
+                            <h4 class="bg-4">{{ __('content.discount') }}</h4>
                         </div>
                     </div>
                 </div>
@@ -104,10 +84,10 @@
                 <div class="tab-header">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">New Added</button>
+                            <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">{{ __('content.new_added') }}</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Old Added</button>
+                            <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">{{ __('content.old_added') }}</button>
                         </li>
                     </ul>
                     <a href="{{ url('/shop') }}" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
@@ -227,15 +207,15 @@
                 <div class="banner-img banner-big wow fadeIn animated f-none">
                     <img src="{{ asset('landing') }}/imgs/banner/banner-4.png" alt="">
                     <div class="banner-text d-md-block d-none">
-                        <h4 class="mb-15 mt-40 text-brand">Repair Services</h4>
-                        <h1 class="fw-600 mb-20">We're an Apple <br>Authorised Service Provider</h1>
+                        <h4 class="mb-15 mt-40 text-brand">{{ __('content.good_service') }}</h4>
+                        <h1 class="fw-600 mb-20">{{ __('content.we_are_best') }}</h1>
                     </div>
                 </div>
             </div>
         </section>
         <section class="popular-categories section-padding mt-15 mb-25">
             <div class="container wow fadeIn animated">
-                <h3 class="section-title mb-20"><span>All</span> Categories</h3>
+                <h3 class="section-title mb-20">{{ __('content.all_category') }}</h3>
                 <div class="carausel-6-columns-cover position-relative">
                     <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows"></div>
                     <div class="carausel-6-columns" id="carausel-6-columns">
@@ -254,7 +234,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h3 class="section-title mb-20"><span>New</span> blog</h3>
+                            <h3 class="section-title mb-20">{{ __('content.new_blog') }}</h3>
                             <a href="{{ url('/blogs') }}" class="view-more">View More <i class="fi-rs-angle-double-small-right"></i></a>
                         </div>
 

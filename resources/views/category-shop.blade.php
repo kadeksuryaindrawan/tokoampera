@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{ url('/') }}" rel="nofollow">Home</a>
-                    <span></span> Shop
+                    <span></span> {{ __('navbar.shop') }}
                     <span></span> {{ ucwords($category->name) }}
                 </div>
             </div>
@@ -18,7 +18,7 @@
                     <div class="col-lg-12">
                         <div class="shop-product-fillter">
                             <div class="totall-product">
-                                <p> We found <strong class="text-brand">{{ $count_products }}</strong> items for you in {{ ucwords($category->name) }} Category!</p>
+                                <p> {{ __('content.we_found') }} <strong class="text-brand">{{ $count_products }}</strong> {{ __('content.items_you') }}!</p>
                             </div>
                         </div>
                         <div class="row product-grid-3">

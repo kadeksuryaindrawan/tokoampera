@@ -20,9 +20,9 @@ return new class extends Migration
             $table->double('total_sebelum_discount');
             $table->double('total');
             $table->enum('status', ['pending', 'menunggu pembayaran', 'konfirmasi pembayaran', 'terbayar', 'terkirim', 'diterima', 'ditolak']);
-            $table->text('alamat');
-            $table->string('long');
-            $table->string('lat');
+            $table->text('alamat')->nullable();
+            $table->string('long')->nullable();
+            $table->string('lat')->nullable();
             $table->string('voucher')->nullable();
             $table->double('discount')->nullable();
             $table->string('shipping_courier')->nullable();

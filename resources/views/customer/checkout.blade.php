@@ -163,7 +163,6 @@
                                         <tr>
                                             <th>Total</th>
                                             @if (session('nominal'))
-
                                                 <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">Rp. {{ number_format($total,0,",",".") }}</span></td>
                                             @else
                                                 <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">Rp. {{ number_format($total_cart,0,",",".") }}</span></td>

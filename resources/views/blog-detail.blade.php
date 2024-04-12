@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{ url('/') }}" rel="nofollow">Home</a>
-                    <span></span> Blog
+                    <span></span> {{ __('navbar.blog') }}
                 </div>
             </div>
         </div>

@@ -29,11 +29,11 @@
                         </div>
 
                     <div class="col-12">
-                        <a href="{{ url('/order-history') }}"><button class="btn btn-sm btn-primary">Order History</button></a>
+                        <a href="{{ url('/order-history') }}"><button class="btn btn-sm btn-primary">History {{ __('navbar.order') }} </button></a>
                             <div class="card mb-4 mt-40">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h4>Order</h4>
+                                        <h4>{{ __('navbar.order') }}</h4>
                                     </div>
                                     <div style="overflow-x: scroll;">
                                         <table id="zero-conf" class="table" style="width:100%">
@@ -91,7 +91,7 @@
                                                                     @elseif ($order->status == 'terkirim')
                                                                         <a onclick="openResiModal('{{ $order->resi }}')" class="dropdown-item">Lihat No Resi</a>
                                                                     @endif
-                                                                    <a href="" class="dropdown-item">Detail</a>
+                                                                    <a href="{{ route('order-detail',$order->id) }}" class="dropdown-item">Detail</a>
                                                                 </div>
                                                             </div>
                                                             @if ($order->status == 'terkirim')
