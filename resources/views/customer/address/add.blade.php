@@ -18,13 +18,13 @@
                     <div class="row">
                 <div class="col-12">
                     <div class="content-header">
-                        <h2 class="content-title">Tambah Alamat</h2>
+                        <h2 class="content-title">{{ __('content.add') }} {{ __('content.address') }}</h2>
                     </div>
                 </div>
                 <div class="col-lg-12 mt-50">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h4>Form Tambah Alamat</h4>
+                            <h4>Form {{ __('content.add') }} {{ __('content.address') }}</h4>
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('customer-address.store') }}" enctype="multipart/form-data">
@@ -33,8 +33,8 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-4">
-                                            <label for="nama_alamat" class="form-label">Nama Alamat</label>
-                                            <input type="text" placeholder="Masukkan Nama Alamat" name="nama_alamat" class="form-control" id="nama_alamat" required>
+                                            <label for="nama_alamat" class="form-label">{{ __('content.name') }} {{ __('content.address') }}</label>
+                                            <input type="text" placeholder="{{ __('content.name') }} {{ __('content.address') }}..." name="nama_alamat" class="form-control" id="nama_alamat" required>
                                             @error('nama_alamat')
                                                 <div class="text-danger text-sm">{{ $message }}</div>
                                             @enderror
@@ -45,7 +45,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-4">
-                                            <label for="alamat" class="form-label">Alamat</label>
+                                            <label for="alamat" class="form-label">{{ __('content.address') }}</label>
                                             <textarea class="form-control" name="alamat" id="alamat" cols="300" rows="100" required></textarea>
                                             @error('alamat')
                                                 <div class="text-danger text-sm">{{ $message }}</div>
@@ -72,7 +72,7 @@
                                 </div>
 
                                 <div class="mb-4 mt-50">
-                                    <button class="btn btn-primary" type="submit">Simpan</button>
+                                    <button class="btn btn-primary" type="submit">{{ __('content.add') }}</button>
                                 </div>
                             </form>
                         </div>

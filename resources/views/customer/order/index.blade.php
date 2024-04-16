@@ -42,10 +42,10 @@
                                                     <th>No</th>
                                                     <th>Invoice</th>
                                                     <th>Total</th>
-                                                    <th>Kurir</th>
-                                                    <th>Ongkir</th>
+                                                    <th>{{ __('content.courier') }}</th>
+                                                    <th>{{ __('content.shipping_price') }}</th>
                                                     <th>Status</th>
-                                                    <th>Tanggal Checkout</th>
+                                                    <th>Checkout</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -67,14 +67,46 @@
                                                         @endif
 
                                                         <td>
-                                                            @if ($order->status == 'pending' || $order->status == 'menunggu pembayaran')
-                                                                <span class="badge rounded-pill alert-warning text-warning">{{ ucwords($order->status) }}</span>
-                                                            @elseif ($order->status == 'terbayar' || $order->status == 'terkirim' || $order->status == 'diterima')
-                                                                <span class="badge rounded-pill alert-success text-success">{{ ucwords($order->status) }}</span>
+                                                            @if ($order->status == 'pending')
+                                                            <span class="badge rounded-pill alert-warning text-warning">{{ ucwords($order->status) }}</span>
+                                                            @elseif ($order->status == 'menunggu pembayaran')
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-warning text-warning">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-warning text-warning">Waiting for payment</span>
+                                                                @endif
+                                                            @elseif ($order->status == 'terbayar')
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-success text-success">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-success text-success">Paid Off</span>
+                                                                @endif
+                                                            @elseif ($order->status == 'terkirim')
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-success text-success">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-success text-success">Sent</span>
+                                                                @endif
+                                                            @elseif ($order->status == 'diterima')
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-success text-success">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-success text-success">Accepted</span>
+                                                                @endif
                                                             @elseif ($order->status == 'konfirmasi pembayaran')
-                                                                <span class="badge rounded-pill alert-warning text-warning">Menunggu Konfirmasi</span>
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-warning text-warning">Menunggu Konfirmasi</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-warning text-warning">Waiting For Confirmation</span>
+                                                                @endif
+
                                                             @else
-                                                                <span class="badge rounded-pill alert-danger text-danger">{{ ucwords($order->status) }}</span>
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-danger text-danger">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-danger text-danger">Rejected</span>
+                                                                @endif
+
                                                             @endif
                                                         </td>
                                                         <td>{{ date("d M Y H:i:s",strtotime($order->created_at)) }}</td>
@@ -85,17 +117,37 @@
                                                                 </button>
                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                     @if ($order->status == 'menunggu pembayaran')
-                                                                        <a href="{{ route('pay',$order->id) }}" class="dropdown-item">Bayar</a>
+                                                                        @if (app()->getLocale() == 'id')
+                                                                            <a href="{{ route('pay',$order->id) }}" class="dropdown-item">Bayar</a>
+                                                                        @else
+                                                                            <a href="{{ route('pay',$order->id) }}" class="dropdown-item">Pay</a>
+                                                                        @endif
+
                                                                     @elseif ($order->status == 'ditolak')
-                                                                        <a onclick="openRejectDetailModal('{{ $order->catatan }}')" class="dropdown-item">Lihat Catatan Penolakan</a>
+                                                                        @if (app()->getLocale() == 'id')
+                                                                            <a onclick="openRejectDetailModal('{{ $order->catatan }}')" class="dropdown-item">Lihat Catatan Penolakan</a>
+                                                                        @else
+                                                                            <a onclick="openRejectDetailModal('{{ $order->catatan }}')" class="dropdown-item">See Disclaimer Note</a>
+                                                                        @endif
+
                                                                     @elseif ($order->status == 'terkirim')
-                                                                        <a onclick="openResiModal('{{ $order->resi }}')" class="dropdown-item">Lihat No Resi</a>
+                                                                        @if (app()->getLocale() == 'id')
+                                                                            <a onclick="openResiModal('{{ $order->resi }}')" class="dropdown-item">Lihat No Resi</a>
+                                                                        @else
+                                                                            <a onclick="openResiModal('{{ $order->resi }}')" class="dropdown-item">See Receipt No</a>
+                                                                        @endif
+
                                                                     @endif
                                                                     <a href="{{ route('order-detail',$order->id) }}" class="dropdown-item">Detail</a>
                                                                 </div>
                                                             </div>
                                                             @if ($order->status == 'terkirim')
-                                                                <a href="{{ route('order-acc',$order->id) }}"><button class="ml-20 btn btn-success btn-sm">Terima Pesanan</button></a>
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <a href="{{ route('order-acc',$order->id) }}"><button class="ml-20 btn btn-success btn-sm">Terima Pesanan</button></a>
+                                                                @else
+                                                                    <a href="{{ route('order-acc',$order->id) }}"><button class="ml-20 btn btn-success btn-sm">Receive Order</button></a>
+                                                                @endif
+
                                                             @endif
                                                         </td>
 
@@ -119,14 +171,14 @@
                         <div class="modal-dialog d-flex justify-content-center">
                             <div class="modal-content w-75">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel1">Catatan Penolakan</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel1">{{ __('content.disclaimer_note') }}</h5>
                                     <a onclick="closeRejectDetailModal()"><i class="fas fa-times"></i></a>
                                 </div>
                                 <div class="modal-body p-4">
                                     <form>
                                         {{-- <input type="hidden" id="order_id" name="order_id" value=""> --}}
                                         <div class="form-outline mb-4">
-                                            <label class="form-label" for="catatan">Alasan Tolak</label>
+                                            <label class="form-label" for="catatan">{{ __('content.reject_reason') }}</label>
                                             <textarea name="catatan" class="form-control" id="catatan" cols="30" rows="10" readonly></textarea>
                                         </div>
                                     </form>
@@ -141,13 +193,13 @@
                         <div class="modal-dialog d-flex justify-content-center">
                             <div class="modal-content w-75">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel1">Detail No Resi</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel1">Detail {{ __('content.no_receipt') }}</h5>
                                     <a onclick="closeResiModal()"><i class="fas fa-times"></i></a>
                                 </div>
                                 <div class="modal-body p-4">
                                     <form>
                                         <div class="form-outline mb-4">
-                                            <label class="form-label" for="resi">No Resi</label>
+                                            <label class="form-label" for="resi">{{ __('content.no_recepit') }}</label>
                                             <input type="text" name="resi" id="resi" class="form-control" readonly required />
                                         </div>
                                     </form>

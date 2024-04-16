@@ -30,21 +30,21 @@
                         </div>
 
                     <div class="col-12">
-                        <a href="{{ url('/checkout') }}"><button class="btn btn-sm btn-primary">Kembali</button></a>
+                        <a href="{{ url('/checkout') }}"><button class="btn btn-sm btn-primary">{{ __('content.back') }}</button></a>
                             <div class="card mb-4 mt-40">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h4>Alamat</h4>
-                                        <a href="{{ route('customer-address.create') }}"><button class="btn btn-primary">Tambah Alamat</button></a>
+                                        <h4>{{ __('content.address') }}</h4>
+                                        <a href="{{ route('customer-address.create') }}"><button class="btn btn-primary">{{ __('content.add') }} {{ __('content.address') }}</button></a>
                                     </div>
                                     <div style="overflow-x: scroll;">
                                         <table id="zero-conf" class="table" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Nama Alamat</th>
-                                                    <th>Alamat</th>
-                                                    <th>Lokasi</th>
+                                                    <th>{{ __('content.name') }} {{ __('content.address') }}</th>
+                                                    <th>{{ __('content.address') }}</th>
+                                                    <th>Map</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -57,7 +57,7 @@
                                                         <td>{{ $no++ }}</td>
                                                         <td>{{ ucwords($c_address->nama_alamat) }}</td>
                                                         <td>{{ ucfirst($c_address->alamat) }}</td>
-                                                        <td><a target="_BLANK" href="https://www.google.com/maps?q={{ $c_address->lat}},{{ $c_address->long}}"><button class="btn btn-sm btn-primary">Lihat Lokasi</button></a></td>
+                                                        <td><a target="_BLANK" href="https://www.google.com/maps?q={{ $c_address->lat}},{{ $c_address->long}}"><button class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></button></a></td>
                                                         <td>
                                                             <div class="dropdown">
                                                                 <button class="btn btn-sm btn-primary" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -70,7 +70,7 @@
                                                                     <form action="{{route('customer-address.destroy',$c_address->id)}}" method="post" onsubmit="return confirm('Yakin hapus alamat?')">
                                                                         @csrf
                                                                         @method('delete')
-                                                                        <button class="dropdown-item"> Hapus</button>
+                                                                        <button class="dropdown-item"> {{ __('content.remove') }}</button>
                                                                     </form>
                                                                 </div>
                                                             </div>

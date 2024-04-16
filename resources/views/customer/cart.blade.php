@@ -34,12 +34,12 @@
                             <table class="table shopping-summery text-center clean">
                                 <thead>
                                     <tr class="main-heading">
-                                        <th scope="col">Img</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Qty</th>
+                                        <th scope="col">{{ __('content.img') }}</th>
+                                        <th scope="col">{{ __('content.name') }}</th>
+                                        <th scope="col">{{ __('content.price') }}</th>
+                                        <th scope="col">{{ __('content.qty') }}</th>
                                         <th scope="col">Subtotal</th>
-                                        <th scope="col">Remove</th>
+                                        <th scope="col">{{ __('content.remove') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,7 +63,7 @@
                                                             <input style="width: 70px;" class="form-control" name="qty" oninput="validateNumberInput()" type="number" id="myNumberInput" value="{{ $cart->qty }}" min="1">
                                                         </div>
                                                         <div class="col-4">
-                                                            <button type="submit" class="btn btn-sm btn-success">Update Qty</button>
+                                                            <button type="submit" class="btn btn-sm btn-success">{{ __('content.update') }} {{ __('content.qty') }}</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -84,10 +84,10 @@
 
                                     <tr>
                                         <td colspan="6" class="text-end">
-                                            <form action="{{ route('clear-cart') }}" method="post" onsubmit="return confirm('Yakin hapus cart?')">
+                                            <form action="{{ route('clear-cart') }}" method="post" onsubmit="return confirm('Clear cart?')">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn-xs btn-danger"><i class="fi-rs-cross-small"></i> Clear Cart</button>
+                                                <button class="btn-xs btn-danger"><i class="fi-rs-cross-small"></i> {{ __('content.clear') }} Cart</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -95,24 +95,24 @@
                             </table>
                         </div>
                         <div class="cart-action text-end">
-                            <a class="btn" href="{{ url('/shop') }}"><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
+                            <a class="btn" href="{{ url('/shop') }}"><i class="fi-rs-shopping-bag mr-10"></i>{{ __('navbar.shop') }}</a>
                         </div>
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                         <div class="row mb-50">
                             <div class="col-lg-12 col-md-12">
                                 <div class="border p-md-4 p-30 border-radius cart-totals">
                                     <div class="heading_s1 mb-3">
-                                        <h4>Cart Totals</h4>
+                                        <h4>Total</h4>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <td class="cart_total_label">Cart Subtotal</td>
+                                                    <td class="cart_total_label">Subtotal</td>
                                                     <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">Rp. {{ number_format($total_cart,0,",",".") }}</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="cart_total_label">Shipping</td>
+                                                    <td class="cart_total_label">{{ __('content.shipping_price') }}</td>
                                                     <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Pending</td>
                                                 </tr>
                                                 <tr>
@@ -122,7 +122,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <a href="{{ url('/checkout') }}" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a>
+                                    <a href="{{ url('/checkout') }}" class="btn "> <i class="fi-rs-box-alt mr-10"></i>CheckOut</a>
                                 </div>
                             </div>
                         </div>

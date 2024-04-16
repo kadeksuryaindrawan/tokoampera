@@ -30,7 +30,7 @@
                         </div>
 
                     <div class="col-12">
-                        <a href="{{ url('/order-lists') }}"><button class="btn btn-sm btn-primary">Kembali</button></a>
+                        <a href="{{ url('/order-lists') }}"><button class="btn btn-sm btn-primary">{{ __('content.back') }}</button></a>
                             <div class="card mb-4 mt-40">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -43,10 +43,10 @@
                                                     <th>No</th>
                                                     <th>Invoice</th>
                                                     <th>Total</th>
-                                                    <th>Kurir</th>
-                                                    <th>Ongkir</th>
+                                                    <th>{{ __('content.courier') }}</th>
+                                                    <th>{{ __('content.shipping_price') }}</th>
                                                     <th>Status</th>
-                                                    <th>Tanggal Checkout</th>
+                                                    <th>Checkout</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -68,12 +68,46 @@
                                                         @endif
 
                                                         <td>
-                                                            @if ($order->status == 'pending' || $order->status == 'menunggu pembayaran' || $order->status == 'konfirmasi pembayaran')
-                                                                <span class="badge rounded-pill alert-warning text-warning">{{ ucwords($order->status) }}</span>
-                                                            @elseif ($order->status == 'terbayar' || $order->status == 'terkirim' || $order->status == 'diterima')
-                                                                <span class="badge rounded-pill alert-success text-success">{{ ucwords($order->status) }}</span>
+                                                            @if ($order->status == 'pending')
+                                                            <span class="badge rounded-pill alert-warning text-warning">{{ ucwords($order->status) }}</span>
+                                                            @elseif ($order->status == 'menunggu pembayaran')
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-warning text-warning">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-warning text-warning">Waiting for payment</span>
+                                                                @endif
+                                                            @elseif ($order->status == 'terbayar')
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-success text-success">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-success text-success">Paid Off</span>
+                                                                @endif
+                                                            @elseif ($order->status == 'terkirim')
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-success text-success">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-success text-success">Sent</span>
+                                                                @endif
+                                                            @elseif ($order->status == 'diterima')
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-success text-success">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-success text-success">Accepted</span>
+                                                                @endif
+                                                            @elseif ($order->status == 'konfirmasi pembayaran')
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-warning text-warning">Menunggu Konfirmasi</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-warning text-warning">Waiting For Confirmation</span>
+                                                                @endif
+
                                                             @else
-                                                                <span class="badge rounded-pill alert-danger text-danger">{{ ucwords($order->status) }}</span>
+                                                                @if (app()->getLocale() == 'id')
+                                                                    <span class="badge rounded-pill alert-danger text-danger">{{ ucwords($order->status) }}</span>
+                                                                @else
+                                                                    <span class="badge rounded-pill alert-danger text-danger">Rejected</span>
+                                                                @endif
+
                                                             @endif
                                                         </td>
                                                         <td>{{ date("d M Y H:i:s",strtotime($order->created_at)) }}</td>
@@ -83,7 +117,7 @@
                                                                     <i class="fas fa-ellipsis-v"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                    <a href="" class="dropdown-item">Detail</a>
+                                                                    <a href="{{ route('order-detail',$order->id) }}" class="dropdown-item">Detail</a>
                                                                 </div>
                                                             </div>
                                                         </td>

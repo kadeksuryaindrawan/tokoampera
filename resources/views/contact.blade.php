@@ -19,7 +19,7 @@
                         <h1 class="mb-20 wow fadeIn animated font-xxl fw-900">
                             {{ __('content.contact_us') }} <br> {{ __('content.contact_below') }}
                         </h1>
-                        <p class="w-50 m-auto wow fadeIn animated">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum quam eius placeat, a quidem mollitia at accusantium reprehenderit pariatur provident nam ratione incidunt magnam sequi.</p>
+                        <p class="w-50 m-auto wow fadeIn animated">{{ __('content.desc_contact') }}</p>
                     </div>
                 </div>
             </div>
@@ -29,10 +29,9 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <h4 class="mb-15 text-brand">{{ __('navbar.shop') }}</h4>
-                        205 North Michigan Avenue, Suite 810<br>
-                        Chicago, 60601, USA<br>
-                        <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>
-                        <abbr title="Email">Email: </abbr>contact@Evara.com<br>
+                        {{ __('content.address_name') }}<br>
+                        <abbr title="Phone">{{ __('content.phone') }} :</abbr> (123) 456-7890<br>
+                        <abbr title="Email">Email : </abbr>contact@Evara.com<br>
                     </div>
                 </div>
             </div>

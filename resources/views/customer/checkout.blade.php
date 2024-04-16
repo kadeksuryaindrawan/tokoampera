@@ -32,32 +32,30 @@
 
                     <div class="col-lg-6 mb-sm-15 mt-40">
                         <div class="toggle_info">
-                            <span></i><span class="text-muted">Ingin menambah alamat?</span> <a href="{{ route('customer-address.index') }}">Tambah Alamat Baru</a></span>
+                            <span></i><span class="text-muted">{{ __('content.add_address') }}</span> <a href="{{ route('customer-address.index') }}">Click</a></span>
                         </div>
                     </div>
                     <div class="col-lg-6 mt-40">
                         <div class="toggle_info">
-                            <span><i class="fi-rs-label mr-10"></i><span class="text-muted">Have a coupon?</span> <a href="#coupon" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to enter your code</a></span>
+                            <span><i class="fi-rs-label mr-10"></i><span class="text-muted">{{ __('content.have_voucher') }}</span> <a href="#coupon" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click</a></span>
                         </div>
                         <div class="panel-collapse collapse coupon_form " id="coupon">
                             <div class="panel-body">
                                 @if (session('nominal'))
-                                    <p class="mb-30 font-sm">Anda sudah menggunakan kode voucher. Hapus terlebih dahulu kode voucher sebelumnya</p>
                                     <form method="post" action="{{ route('voucher-destroy') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-md">Hapus Kode Voucher Sebelumnya</button>
+                                            <button type="submit" class="btn btn-md">{{ __('content.delete_voucher') }}</button>
                                         </div>
                                     </form>
                                 @else
-                                    <p class="mb-30 font-sm">Jika anda memiliki kode voucher, masukkan kode voucher dibawah.</p>
                                     <form method="post" action="{{ route('voucher') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="text" name="voucher" placeholder="Masukkan Kode Voucher...">
+                                            <input type="text" name="voucher" placeholder="Voucher...">
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-md">Apply Coupon</button>
+                                            <button type="submit" class="btn btn-md">{{ __('content.apply_voucher') }}</button>
                                         </div>
                                     </form>
 
@@ -75,12 +73,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-25">
-                            <h4>Billing Details</h4>
+                            <h4>Billing Detail</h4>
                         </div>
                         <form method="post" action="{{ route('checkout-process') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="">Nama Lengkap</label>
+                                <label for="">{{ __('content.fullname') }}</label>
                                 <input type="text" required="" name="nama_lengkap" value="{{ $customer->nama_lengkap }}" readonly>
                             </div>
                             <div class="form-group">
@@ -88,13 +86,13 @@
                                 <input type="email" required="" name="email" value="{{ $customer->user->email }}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="">No Telp</label>
+                                <label for="">{{ __('content.phone') }}</label>
                                 <input type="number" required="" name="telp" value="{{ $customer->telp }}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="">Alamat</label>
+                                <label for="">{{ __('content.address') }}</label>
                                 <select name="customer_address_id" id="" class="form-control" required>
-                                    <option value="" selected disabled>- Pilih Alamat -</option>
+                                    <option value="" selected disabled>- {{ __('content.choose') }} {{ __('content.address') }} -</option>
                                     @foreach ($customer_addresses as $ca)
                                         <option value="{{ $ca->id }}">{{ $ca->nama_alamat }} - {{ $ca->alamat }}</option>
                                     @endforeach
@@ -117,13 +115,13 @@
                     <div class="col-md-6">
                         <div class="order_review">
                             <div class="mb-20">
-                                <h4>Your Orders</h4>
+                                <h4>Order</h4>
                             </div>
                             <div class="table-responsive order_table text-center">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">Product</th>
+                                            <th colspan="2">{{ __('content.product') }}</th>
                                             <th>Total</th>
                                         </tr>
                                     </thead>
@@ -148,7 +146,7 @@
                                             <td class="product-subtotal" colspan="2">Rp. {{ number_format($total_cart,0,",",".") }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Shipping</th>
+                                            <th>{{ __('content.shipping_price') }}</th>
                                             <td colspan="2"><em>Pending</em></td>
                                         </tr>
                                         <tr>

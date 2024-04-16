@@ -326,7 +326,7 @@
                         </div>
                     </div>
                     <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-headset"></i><span>Hotline</span> 1900 - 888 </p>
+
                     </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
@@ -438,14 +438,6 @@
                         <a href="#">(+01) - 2345 - 6789 </a>
                     </div>
                 </div>
-                <div class="mobile-social-icon">
-                    <h5 class="mb-15 text-grey-4">Follow Us</h5>
-                    <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                    <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                    <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                    <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                    <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-youtube.svg" alt=""></a>
-                </div>
             </div>
         </div>
     </div>
@@ -475,22 +467,11 @@
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">{{ __('navbar.contact') }}</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Address: </strong>562 Wellington Road, Street 32, San Francisco
+                                <strong>{{ __('content.address') }} : </strong>{{ __('content.address_name') }}
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Phone: </strong>+01 2222 365 /(+91) 01 2345 6789
+                                <strong>{{ __('content.phone') }} : </strong>+01 2222 365 /(+91) 01 2345 6789
                             </p>
-                            <p class="wow fadeIn animated">
-                                <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
-                            </p>
-                            <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
-                            <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                                <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                                <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                                <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                                <a href="#"><img src="{{ asset('landing') }}/imgs/theme/icons/icon-youtube.svg" alt=""></a>
-                            </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4">
