@@ -31,7 +31,7 @@
                         <h4 class="mb-15 text-brand">{{ __('navbar.shop') }}</h4>
                         {{ __('content.address_name') }}<br>
                         <abbr title="Phone">{{ __('content.phone') }} :</abbr> (123) 456-7890<br>
-                        <abbr title="Email">Email : </abbr>contact@Evara.com<br>
+                        <abbr title="Email">Email : </abbr>Artshopcempaka@gmail.com<br>
                     </div>
                 </div>
             </div>
