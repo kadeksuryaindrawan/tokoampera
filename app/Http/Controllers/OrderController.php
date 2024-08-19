@@ -81,7 +81,6 @@ class OrderController extends Controller
         }else{
             return redirect()->back();
         }
-
     }
 
     public function checkout_process(Request $request)
