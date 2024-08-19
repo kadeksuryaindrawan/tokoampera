@@ -6,7 +6,7 @@ return [
     'great'   => 'Koleksi Bagus',
     'save'   => 'Lebih hemat dengan voucher',
     'shop_now'   => 'Beli Sekarang',
-    'upcoming' => 'Tawaran Mendatang',
+    'upcoming' => 'Tawaran Mendatangs',
     'big_deals' => 'Tawaran Besar Dari',
     'painter' => 'Pelukis',
     'many_categories' => 'Terdapat banyak kategori',
