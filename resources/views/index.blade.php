@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-lg-7 col-md-6 d-none d-md-block">
                                 <div class="single-slider-img single-slider-img-1">
-                                    <img style="width: 800px; height:500px; object-fit:cover" class="animated slider-1-2" src="{{ asset('landing') }}/imgs/2.jpg" alt="">
+                                    <img style="width: 800px; height:500px; object-fit:cover" class="animated slider-1-2" src="{{ asset('landing') }}/imgs/slide1.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-lg-7 col-md-6 d-none d-md-block">
                                 <div class="single-slider-img single-slider-img-1">
-                                    <img style="width: 800px; height:500px; object-fit:cover" class="animated slider-1-3" src="{{ asset('landing') }}/imgs/3.jpg" alt="">
+                                    <img style="width: 800px; height:500px; object-fit:cover" class="animated slider-1-3" src="{{ asset('landing') }}/imgs/slide2.jpg" alt="">
                                 </div>
                             </div>
                         </div>
