@@ -59,11 +59,11 @@
                         <span class="text">Voucher</span>
                     </a>
                 </li>
-                <li class="menu-item {{ (request()->segment(1) == 'blog') ? 'active' : '' }}">
+                {{-- <li class="menu-item {{ (request()->segment(1) == 'blog') ? 'active' : '' }}">
                     <a class="menu-link" href="{{ route('blog.index') }}"> <i class="icon material-icons md-library_books"></i>
                         <span class="text">Blog</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu-item {{ (request()->segment(1) == 'order') ? 'active' : '' }}">
                     <a class="menu-link" href="{{ url('/order') }}"> <i class="icon material-icons md-shopping_cart"></i>
                         <span class="text">Order</span>
@@ -74,11 +74,11 @@
                         <span class="text">Order Sukses</span>
                     </a>
                 </li>
-                <li class="menu-item {{ (request()->segment(1) == 'pos' || request()->segment(1) == 'pos-history' || request()->segment(1) == 'invoice-detail') ? 'active' : '' }}">
+                {{-- <li class="menu-item {{ (request()->segment(1) == 'pos' || request()->segment(1) == 'pos-history' || request()->segment(1) == 'invoice-detail') ? 'active' : '' }}">
                     <a class="menu-link" href="{{ url('/pos') }}"> <i class="icon material-icons md-monetization_on"></i>
                         <span class="text">POS</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
 
             <br>

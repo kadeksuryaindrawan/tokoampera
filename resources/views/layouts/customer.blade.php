@@ -318,7 +318,7 @@
                                 <ul>
                                     <li><a class="{{ (request()->segment(1) == 'home' || request()->segment(1) == '') ? 'active' : '' }}" href="{{ url('/') }}">{{ __('navbar.home') }}</a></li>
                                     <li><a class="{{ (request()->segment(1) == 'shop' || request()->segment(1) == 'product-detail' || request()->segment(1) == 'cart' || request()->segment(1) == 'category-shop' || request()->segment(1) == 'checkout' || request()->segment(1) == 'customer-address') ? 'active' : '' }}" href="{{ url('/shop') }}">{{ __('navbar.shop') }}</a></li>
-                                    <li><a class="{{ (request()->segment(1) == 'blogs' || request()->segment(1) == 'blog-detail') ? 'active' : '' }}" href="{{ url('/blogs') }}">{{ __('navbar.blog') }}</a></li>
+                                    {{-- <li><a class="{{ (request()->segment(1) == 'blogs' || request()->segment(1) == 'blog-detail') ? 'active' : '' }}" href="{{ url('/blogs') }}">{{ __('navbar.blog') }}</a></li> --}}
                                     <li><a class="{{ (request()->segment(1) == 'contact') ? 'active' : '' }}" href="{{ url('/contact') }}">{{ __('navbar.contact') }}</a></li>
                                     <li><a class="{{ (request()->segment(1) == 'order-lists' || request()->segment(1) == 'order-history' || request()->segment(1) == 'pay' || request()->segment(1) == 'order-acc') ? 'active' : '' }}" href="{{ url('/order-lists') }}">{{ __('navbar.order') }}</a></li>
                                 </ul>
@@ -400,8 +400,8 @@
                             </li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/shop') }}">{{ __('navbar.shop') }}</a>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/blogs') }}">{{ __('navbar.blog') }}</a>
-                            </li>
+                            {{-- <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/blogs') }}">{{ __('navbar.blog') }}</a>
+                            </li> --}}
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/contact') }}">{{ __('navbar.contact') }}</a>
                             </li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ url('/order-lists') }}">{{ __('navbar.order') }}</a>
@@ -479,7 +479,7 @@
                         <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
                             <li><a href="{{ url('/') }}">{{ __('navbar.home') }}</a></li>
                             <li><a href="{{ url('/shop') }}">{{ __('navbar.shop') }}</a></li>
-                            <li><a href="{{ url('/blogs') }}">{{ __('navbar.blog') }}</a></li>
+                            {{-- <li><a href="{{ url('/blogs') }}">{{ __('navbar.blog') }}</a></li> --}}
                             <li><a href="{{ url('/contact') }}">{{ __('navbar.contact') }}</a></li>
                         </ul>
                     </div>

@@ -36,7 +36,7 @@ class HomeController extends Controller
             $category_count = Category::count();
             $product_count = Product::count();
             $voucher_count = Voucher::count();
-            $blog_count = Blog::count();
+            // $blog_count = Blog::count();
             $year = date('Y');
             $januari = Order::whereYear('created_at', date('Y'))->whereMonth('created_at', '01')->where('status', 'diterima')->count();
             $februari = Order::whereYear('created_at', date('Y'))->whereMonth('created_at', '02')->where('status', 'diterima')->count();
@@ -50,7 +50,7 @@ class HomeController extends Controller
             $oktober = Order::whereYear('created_at', date('Y'))->whereMonth('created_at', '10')->where('status', 'diterima')->count();
             $november = Order::whereYear('created_at', date('Y'))->whereMonth('created_at', '11')->where('status', 'diterima')->count();
             $desember = Order::whereYear('created_at', date('Y'))->whereMonth('created_at', '12')->where('status', 'diterima')->count();
-            return view('admin.dashboard.index',compact('orders','category_count','product_count','voucher_count','blog_count', 'januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember', 'year'));
+            return view('admin.dashboard.index',compact('orders','category_count','product_count','voucher_count', 'januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember', 'year'));
         }
         if (Auth::user()->role == 'customer') {
             if (Auth::check() == true) {
@@ -60,10 +60,10 @@ class HomeController extends Controller
                 $count_cart = 0;
             }
             $categories = Category::orderBy('created_at', 'desc')->get();
-            $blogs = Blog::orderBy('created_at', 'desc')->where('status', 'tampil')->paginate(3);
+            // $blogs = Blog::orderBy('created_at', 'desc')->where('status', 'tampil')->paginate(3);
             $new_products = Product::orderBy('created_at', 'desc')->where('status', 'active')->where('stok', '>', 0)->paginate(8);
             $old_products = Product::orderBy('created_at', 'asc')->where('status', 'active')->where('stok', '>', 0)->paginate(8);
-            return view('index', compact('categories', 'blogs', 'new_products', 'old_products','count_cart'));
+            return view('index', compact('categories', 'new_products', 'old_products','count_cart'));
         }
     }
 }

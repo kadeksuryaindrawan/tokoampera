@@ -34,16 +34,16 @@ Route::get('/', [LandingController::class, 'index']);
 Route::get('/shop', [LandingController::class, 'shop']);
 Route::get('/category-shop/{id}', [LandingController::class, 'category_shop'])->name('category-shop');
 Route::get('/product-detail/{id}', [LandingController::class, 'product_detail'])->name('product-detail');
-Route::get('/blogs', [LandingController::class, 'blogs']);
+// Route::get('/blogs', [LandingController::class, 'blogs']);
 Route::get('/contact', [LandingController::class, 'contact']);
-Route::get('/blog-detail/{id}', [LandingController::class, 'blog_detail'])->name('blog-detail');
+// Route::get('/blog-detail/{id}', [LandingController::class, 'blog_detail'])->name('blog-detail');
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('user', UserController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
     Route::resource('vouchers', VoucherController::class);
-    Route::resource('blog', BlogController::class);
+    // Route::resource('blog', BlogController::class);
     Route::get('/order', [OrderController::class, 'order'])->name('order');
     Route::post('/add-shipping', [OrderController::class, 'add_shipping'])->name('add-shipping');
     Route::get('/pay-detail/{id}', [OrderController::class, 'pay_detail'])->name('pay-detail');
@@ -52,10 +52,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/add-resi', [OrderController::class, 'add_resi'])->name('add-resi');
     Route::delete('/order-delete/{id}', [OrderController::class, 'order_delete'])->name('order-delete');
     Route::get('/order-success', [OrderController::class, 'order_success'])->name('order-success');
-    Route::get('/pos', [POSController::class, 'index'])->name('pos');
-    Route::get('/pos-history', [POSController::class, 'pos_history'])->name('pos-history');
-    Route::get('/invoice-detail/{id}', [POSController::class, 'invoice_detail'])->name('invoice-detail');
-    Route::get('/export-pdf-invoice/{id}', [POSController::class, 'exportPdfInvoice'])->name('export-pdf-invoice');
+    // Route::get('/pos', [POSController::class, 'index'])->name('pos');
+    // Route::get('/pos-history', [POSController::class, 'pos_history'])->name('pos-history');
+    // Route::get('/invoice-detail/{id}', [POSController::class, 'invoice_detail'])->name('invoice-detail');
+    // Route::get('/export-pdf-invoice/{id}', [POSController::class, 'exportPdfInvoice'])->name('export-pdf-invoice');
     Route::get('/export-excel-penjualan-tahun/{year}', [OrderController::class, 'exportExcelTahun'])->name('export-excel-penjualan-tahun');
 });
 

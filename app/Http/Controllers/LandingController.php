@@ -28,10 +28,10 @@ class LandingController extends Controller
     {
         $count_cart = $this->count_cart();
         $categories = Category::orderBy('created_at','desc')->get();
-        $blogs = Blog::orderBy('created_at','desc')->where('status','tampil')->paginate(3);
+        // $blogs = Blog::orderBy('created_at','desc')->where('status','tampil')->paginate(3);
         $new_products = Product::orderBy('created_at', 'desc')->where('status', 'active')->where('stok','>',0)->paginate(8);
         $old_products = Product::orderBy('created_at', 'asc')->where('status', 'active')->where('stok', '>', 0)->paginate(8);
-        return view('index',compact('categories','blogs','new_products','old_products','count_cart'));
+        return view('index',compact('categories','new_products','old_products','count_cart'));
     }
 
     public function shop()
@@ -63,21 +63,21 @@ class LandingController extends Controller
         return view('product-detail', compact('product', 'categories','products', 'count_cart','rater','order_products'));
     }
 
-    public function blogs()
-    {
-        $count_cart = $this->count_cart();
-        $categories = Category::orderBy('created_at', 'desc')->get();
-        $blogs = Blog::orderBy('created_at', 'desc')->where('status', 'tampil')->get();
-        return view('blogs', compact('blogs','categories', 'count_cart'));
-    }
+    // public function blogs()
+    // {
+    //     $count_cart = $this->count_cart();
+    //     $categories = Category::orderBy('created_at', 'desc')->get();
+    //     $blogs = Blog::orderBy('created_at', 'desc')->where('status', 'tampil')->get();
+    //     return view('blogs', compact('blogs','categories', 'count_cart'));
+    // }
 
-    public function blog_detail($id)
-    {
-        $count_cart = $this->count_cart();
-        $categories = Category::orderBy('created_at', 'desc')->get();
-        $blog = Blog::find($id);
-        return view('blog-detail', compact('blog','categories', 'count_cart'));
-    }
+    // public function blog_detail($id)
+    // {
+    //     $count_cart = $this->count_cart();
+    //     $categories = Category::orderBy('created_at', 'desc')->get();
+    //     $blog = Blog::find($id);
+    //     return view('blog-detail', compact('blog','categories', 'count_cart'));
+    // }
 
     public function contact()
     {

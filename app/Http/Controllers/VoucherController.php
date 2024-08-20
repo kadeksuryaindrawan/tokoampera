@@ -46,7 +46,7 @@ class VoucherController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('voucher.create')->withErrors($validator)->withInput();
+            return redirect()->route('vouchers.create')->withErrors($validator)->withInput();
         }
         try {
             if ($request->hasFile('gambar_voucher')) {
@@ -69,7 +69,7 @@ class VoucherController extends Controller
                 ]);
             }
 
-            return redirect()->route('voucher.index')->with('success', 'Berhasil tambah voucher!');
+            return redirect()->route('vouchers.index')->with('success', 'Berhasil tambah voucher!');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -124,7 +124,7 @@ class VoucherController extends Controller
         }
 
         if ($validator->fails()) {
-            return redirect()->route('voucher.edit', ['voucher' => $voucher->id])->withErrors($validator)->withInput();
+            return redirect()->route('vouchers.edit', ['voucher' => $voucher->id])->withErrors($validator)->withInput();
         }
         try {
             if ($request->hasFile('gambar_voucher')) {
@@ -147,7 +147,7 @@ class VoucherController extends Controller
                 ]);
             }
 
-            return redirect()->route('voucher.index')->with('success', 'Berhasil edit voucher!');
+            return redirect()->route('vouchers.index')->with('success', 'Berhasil edit voucher!');
         } catch (\Throwable $th) {
             throw $th;
         }

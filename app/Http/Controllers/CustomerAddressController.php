@@ -66,7 +66,7 @@ class CustomerAddressController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('customer_address.create')->withErrors($validator)->withInput();
+            return redirect()->route('customer-address.create')->withErrors($validator)->withInput();
         }
         try {
             $customer = Customer::where('user_id', Auth::user()->id)->first();

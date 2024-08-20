@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="card card-body mb-4">
                         <article class="icontext">
                             <div class="text">
@@ -18,7 +18,7 @@
                         </article>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="card card-body mb-4">
                         <article class="icontext">
                             <div class="text">
@@ -28,7 +28,7 @@
                         </article>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="card card-body mb-4">
                         <article class="icontext">
                             <div class="text">
@@ -38,7 +38,7 @@
                         </article>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                {{-- <div class="col-lg-3">
                     <div class="card card-body mb-4">
                         <article class="icontext">
                             <div class="text">
@@ -47,7 +47,7 @@
                             </div>
                         </article>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <livewire:year-sort :year="$year"/>

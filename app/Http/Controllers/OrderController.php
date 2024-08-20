@@ -335,11 +335,19 @@ class OrderController extends Controller
         }
         try {
             $catatan = $request->catatan;
+            $order_products = OrderProduct::where('order_id', $id)->get();
 
             Order::where('id', $id)->update([
                 'catatan' => $catatan,
                 'status' => 'ditolak',
             ]);
+
+            foreach ($order_products as $op) {
+                $product_id = $op->product_id;
+                $product = Product::find($product_id);
+                $product->stok += $op->qty;
+                $product->save();
+            }
 
             return redirect()->route('order')->with('success', 'Berhasil tolak pembayaran!');
         } catch (\Throwable $th) {

@@ -229,7 +229,7 @@
                 </div>
             </div>
         </section>
-        <section class="section-padding">
+        {{-- <section class="section-padding">
             <div class="container pt-25 pb-20">
                 <div class="row">
                     <div class="col-lg-12">
@@ -265,7 +265,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
     </main>
 

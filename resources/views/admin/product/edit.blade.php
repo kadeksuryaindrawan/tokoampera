@@ -52,7 +52,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-4">
                                             <label for="status" class="form-label">Status</label>
                                             <select name="status" id="status" class="form-control" required>
@@ -67,7 +67,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="mb-4">
                                             <label for="stok" class="form-label">Stok</label>
                                             <input type="number" placeholder="Masukkan Stok" name="stok" value="{{ $product->stok }}" class="form-control" id="stok" required>
