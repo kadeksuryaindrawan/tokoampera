@@ -38,7 +38,7 @@ class OrderController extends Controller
         for ($i = 0; $i < 5; $i++) {
             $randomString .= $characters[random_int(0, $charactersLength - 1)];
         }
-        $invoice = 'CMPK/' . str_pad(date('m'), 2, '0', STR_PAD_LEFT) . '/' . date('Y') . '/' . $randomString;
+        $invoice = 'AMPR/' . str_pad(date('m'), 2, '0', STR_PAD_LEFT) . '/' . date('Y') . '/' . $randomString;
         return $invoice;
     }
 
