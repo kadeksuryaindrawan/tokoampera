@@ -23,7 +23,7 @@
             <div class="card mx-auto card-login">
                 <div class="card-body pb-50">
                     <div class="mb-4 text-center">
-                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" width="20%" alt="logo"></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo-ampera.png" width="20%" alt="logo"></a>
                     </div>
 
                     <h4 class="card-title mb-3">{{ __('navbar.login') }}</h4>

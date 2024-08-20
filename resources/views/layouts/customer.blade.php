@@ -12,7 +12,7 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('landing') }}/imgs/theme/logo.jpg">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('landing') }}/imgs/theme/logo-ampera.png">
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('landing/css/main.css?v=3.4') }}">
     <link href="{{ asset('admin/DataTables/datatables.min.css') }}" rel="stylesheet">
@@ -189,9 +189,9 @@
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info">
-                            <ul>
+                            {{-- <ul>
                                 <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-4">
@@ -248,7 +248,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo">
-                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" width="7%" alt="logo"></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo-ampera.png" width="25%" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
@@ -297,7 +297,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo d-block d-lg-none">
-                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" width="13%" alt="logo"></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo-ampera.png" width="13%" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
@@ -363,7 +363,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" alt="logo"></a>
+                    <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo-ampera.png" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -434,9 +434,9 @@
                                 @endif
 
                     </div>
-                    <div class="single-mobile-header-info">
+                    {{-- <div class="single-mobile-header-info">
                         <a href="#">(+01) - 2345 - 6789 </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -463,15 +463,15 @@
                     <div class="col-lg-8 col-md-4">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo wow fadeIn animated">
-                                <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo.jpg" style="width: 15%;" alt="logo"></a>
+                                <a href="{{ url('/') }}"><img src="{{ asset('landing') }}/imgs/theme/logo-ampera.png" style="width: 15%;" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">{{ __('navbar.contact') }}</h5>
                             <p class="wow fadeIn animated">
                                 <strong>{{ __('content.address') }} : </strong>{{ __('content.address_name') }}
                             </p>
-                            <p class="wow fadeIn animated">
+                            {{-- <p class="wow fadeIn animated">
                                 <strong>{{ __('content.phone') }} : </strong>+01 2222 365 /(+91) 01 2345 6789
-                            </p>
+                            </p> --}}
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4">

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin') }}/imgs/theme/logo.jpg">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('landing') }}/imgs/theme/logo-ampera.png">
     <!-- Template CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="{{ asset('admin/css/main.css') }}" rel="stylesheet" type="text/css" />
@@ -25,7 +25,7 @@
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
             <a href="{{ url('/') }}" class="brand-wrap">
-                <img src="{{ asset('admin/imgs/theme/logo.jpg') }}" style="width: 20%; margin-bottom:-10px;" alt="Evara Dashboard">
+                <img src="{{ asset('landing/imgs/theme/logo-ampera.png') }}" style="width: 20%; margin-bottom:-10px;" alt="Evara Dashboard">
             </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
