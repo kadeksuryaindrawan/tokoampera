@@ -18,7 +18,8 @@
                             @endif
                         </div>
             </div>
-            <div class="card mb-4">
+            <a href="{{ route('export-all-product') }}"><button class="btn btn-danger">Export PDF</button></a>
+            <div class="card mb-4 mt-4">
                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <h4>Produk</h4>

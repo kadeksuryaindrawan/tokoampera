@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerAddressController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
@@ -42,6 +43,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('user', UserController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
+    Route::get('/export-all-product', [ProductController::class, 'export_all_pdf'])->name('export-all-product');
     Route::resource('vouchers', VoucherController::class);
     // Route::resource('blog', BlogController::class);
     Route::get('/order', [OrderController::class, 'order'])->name('order');
@@ -57,6 +59,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     // Route::get('/invoice-detail/{id}', [POSController::class, 'invoice_detail'])->name('invoice-detail');
     // Route::get('/export-pdf-invoice/{id}', [POSController::class, 'exportPdfInvoice'])->name('export-pdf-invoice');
     Route::get('/export-excel-penjualan-tahun/{year}', [OrderController::class, 'exportExcelTahun'])->name('export-excel-penjualan-tahun');
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan-all');
+    Route::get('/laporan/filter', [LaporanController::class, 'daftar_filter_laporan'])->name('filter-laporan');
+    Route::get('/export-all-pdf', [LaporanController::class, 'export_all_pdf'])->name('export-all-pdf');
+    Route::get('/export-filter-pdf', [LaporanController::class, 'export_filter_pdf'])->name('export-filter-pdf');
 });
 
 Route::get('/order-detail/{id}', [OrderController::class, 'order_detail'])->name('order-detail')->middleware('auth');

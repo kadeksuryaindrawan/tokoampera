@@ -74,6 +74,11 @@
                         <span class="text">Order Sukses</span>
                     </a>
                 </li>
+                <li class="menu-item {{ (request()->segment(1) == 'laporan') ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ route('laporan-all') }}"> <i class="icon material-icons md-folder"></i>
+                        <span class="text">Laporan</span>
+                    </a>
+                </li>
                 {{-- <li class="menu-item {{ (request()->segment(1) == 'pos' || request()->segment(1) == 'pos-history' || request()->segment(1) == 'invoice-detail') ? 'active' : '' }}">
                     <a class="menu-link" href="{{ url('/pos') }}"> <i class="icon material-icons md-monetization_on"></i>
                         <span class="text">POS</span>

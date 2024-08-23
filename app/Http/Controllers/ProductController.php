@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -181,5 +182,21 @@ class ProductController extends Controller
         unlink(storage_path('app/public/products/' . $product->img));
         $product->delete();
         return redirect()->back()->with('success', 'Produk berhasil dihapus!');
+    }
+
+    public function export_all_pdf()
+    {
+        $products = Product::orderBy('created_at', 'desc')->get();
+
+        $pdfOptions = [
+            'isRemoteEnabled' => true,
+        ];
+
+        $pdf = PDF::loadView('admin.product.pdfview', [
+            'products' =>  $products,
+        ], $pdfOptions)
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->download('all-product.pdf');
     }
 }
