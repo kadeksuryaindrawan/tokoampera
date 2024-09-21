@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -549,6 +550,31 @@ class OrderController extends Controller
     public function exportExcelTahun($year)
     {
         return Excel::download(new ExportPenjualanTahun($year), 'data-penjualan-' . $year . '.xlsx');
+    }
+
+    public function export_pdf($status)
+    {
+        $orders = Order::with(['customer','order_product'])
+                    ->when($status == "diterima", function($query){
+                        return $query->where('status','diterima');
+                    })
+                    ->when($status != "diterima", function($query) {
+                        return $query->where('status','!=','diterima');
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+        
+
+        $pdfOptions = [
+            'isRemoteEnabled' => true,
+        ];
+
+        $pdf = PDF::loadView('admin.order.pdfview', [
+            'orders' =>  $orders,
+        ], $pdfOptions)
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->download('all-order.pdf');
     }
 
 

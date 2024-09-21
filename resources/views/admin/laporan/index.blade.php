@@ -43,7 +43,6 @@
                             </div>
                         </div>
                     </form>
-                    <a href="{{ route('laporan-all') }}"><button class="btn btn-secondary">Tampilkan Semua Data Tanpa Filter</button></a>
 
             <div class="card mb-4 mt-4">
                 <div class="card-body">

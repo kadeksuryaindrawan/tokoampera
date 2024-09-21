@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/add-resi', [OrderController::class, 'add_resi'])->name('add-resi');
     Route::delete('/order-delete/{id}', [OrderController::class, 'order_delete'])->name('order-delete');
     Route::get('/order-success', [OrderController::class, 'order_success'])->name('order-success');
+    Route::get('/export-order/{status}', [OrderController::class, 'export_pdf'])->name('export-order');
     // Route::get('/pos', [POSController::class, 'index'])->name('pos');
     // Route::get('/pos-history', [POSController::class, 'pos_history'])->name('pos-history');
     // Route::get('/invoice-detail/{id}', [POSController::class, 'invoice_detail'])->name('invoice-detail');
